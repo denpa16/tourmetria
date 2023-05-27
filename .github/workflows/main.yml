@@ -1,0 +1,15 @@
+name: Tourmetria workflow
+
+on:
+  push:
+    branches: [ "master", "develop" ]
+
+jobs:
+  prepare-environment:
+    runs-on: self-hosted
+    needs: test
+    steps:
+      - name: Stop and remove containers, networks
+        run: docker-compose down
+      - name: Remove unused data
+        run: docker system prune -a -f
