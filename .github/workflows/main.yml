@@ -14,5 +14,9 @@ jobs:
   release:
     runs-on: self-hosted
     steps:
+      - name: docker down
+        run: docker-compose down
+      - name: docker pull
+        run: docker-compose pull
       - name: docker up
         run: docker-compose up -d
