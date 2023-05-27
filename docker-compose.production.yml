@@ -1,6 +1,36 @@
 version: '3.8'
 
 services:
+  nginx:
+    build:
+      context: ./nginx
+      cache_from: [ "registry.gitlab.idacloud.ru/idaproject/neometry/neometry-site/nginx:${CACHE_FROM_TAG:-latest}" ]
+    restart: always
+    depends_on:
+      - backend
+    volumes:
+      - local_static:/var/www/local_static/
+      - static:/var/www/static/:ro
+      - acme.sh:/acme.sh:delegated
+      - certs:/etc/nginx/certs
+    environment:
+      - ENVIRONMENT=production
+      - SITE_HOST
+      - MONITORING_HTPASSWD
+      - HTPASSWD
+
+    ports:
+      - 80:80
+      - 443:443
+      - 9100:9100
+      - 9187:9187
+      - 8081:8080
+
+    logging:
+      driver: journald
+      options:
+        tag: nginx
+
   db:
     restart: always
     ports:
@@ -37,4 +67,8 @@ services:
         tag: db
 
 volumes:
+  local_static:
+  acme.sh:
+  certs:
+  static:
   postgresdata:
