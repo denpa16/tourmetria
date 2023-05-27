@@ -5,11 +5,8 @@ on:
     branches: [ "master", "develop" ]
 
 jobs:
-  prepare-environment:
-    runs-on: self-hosted
-    needs: test
+  test:
+    runs-on: ubuntu-latest
     steps:
-      - name: Stop and remove containers, networks
-        run: docker-compose down
-      - name: Remove unused data
-        run: docker system prune -a -f
+      - name: checkout repo
+        uses: actions/checkout@v3
