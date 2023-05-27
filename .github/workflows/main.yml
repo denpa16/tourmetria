@@ -14,9 +14,9 @@ jobs:
   release:
     runs-on: self-hosted
     steps:
-      - name: stop and remove containers, networks
+      - name: docker down
         run: docker-compose down
       - name: docker pull
-        run: docker-compose -f docker-compose.yml pull
+        run: docker-compose pull
       - name: docker up
-        run: docker-compose -f docker-compose.yml up --remove-orphans -d
+        run: docker-compose.yml up --remove-orphans -d
