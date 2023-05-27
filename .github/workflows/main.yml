@@ -20,7 +20,7 @@ jobs:
         run: docker-compose down
       - name: docker system prune
         run: docker system prune -a -f
-      - name: docker compose -f docker-compose.yml -f docker-compose.production.ym pull
+      - name: docker compose -f docker-compose.yml -f docker-compose.production.yml pull
         run: docker-compose pull
       - name: docker-compose up
-        run: docker compose -f docker-compose.yml -f docker-compose.production.ym up -d
+        run: docker compose -f docker-compose.yml -f docker-compose.production.yml up -d
