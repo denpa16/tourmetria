@@ -4,7 +4,6 @@ services:
   nginx:
     build:
       context: ./nginx
-      cache_from: [ "registry.gitlab.idacloud.ru/idaproject/neometry/neometry-site/nginx:${CACHE_FROM_TAG:-latest}" ]
     restart: always
     depends_on:
       - backend
