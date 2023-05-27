@@ -19,4 +19,4 @@ jobs:
       - name: docker pull
         run: docker-compose pull
       - name: docker up
-        run: docker-compose.yml up --remove-orphans -d
+        run: docker-compose up --remove-orphans -d
