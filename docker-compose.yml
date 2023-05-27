@@ -1,0 +1,22 @@
+version: '3.8'
+
+x-app_environment: &app_environment
+  environment:
+    - POSTGRES_PASSWORD
+    - POSTGRES_PORT
+    - POSTGRES_NAME
+    - POSTGRES_USER
+
+
+
+
+services:
+  db:
+    image: postgres:13.3-alpine
+    volumes:
+      - postgresdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD
+      - POSTGRES_PORT
+      - POSTGRES_NAME
+      - POSTGRES_USER
