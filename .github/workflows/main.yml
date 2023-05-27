@@ -20,5 +20,7 @@ jobs:
         run: docker-compose down
       - name: docker system prune
         run: docker system prune -a -f
+      - name: docker-compose pull
+        run: docker-compose pull
       - name: docker-compose up
-        run: docker-compose up --remove-orphans -d
+        run: docker-compose up -d
