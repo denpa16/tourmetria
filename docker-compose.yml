@@ -20,3 +20,6 @@ services:
       - POSTGRES_PORT
       - POSTGRES_NAME
       - POSTGRES_USER
+
+volumes:
+  postgresdata:
