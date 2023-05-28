@@ -26,6 +26,10 @@ jobs:
         run: echo "The POSTGRES_USER key is:$POSTGRES_NAME"
       - name: checkout repo
         uses: actions/checkout@v3
+      - name: docker-compose dpwn
+        run: docker compose down
+      - name: docker system prune -f
+        run: docker system prune -f
       - name: docker compose -f docker-compose.yml -f docker-compose.production.yml pull
         run: docker-compose pull
       - name: docker-compose up
