@@ -6,7 +6,7 @@ on:
 
 
 env:
-  POSTGRES_NAME: ${{ secrets.POSTGRES_NAME }}
+  POSTGRES_NAME: ${{ env.POSTGRES_NAME }}
 
 jobs:
   build:
