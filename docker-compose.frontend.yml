@@ -10,9 +10,7 @@ services:
     environment:
       - IMGPROXY_SITE_HOST
       - SERVER_API_URL
+    depends_on:
+      - backend
     volumes:
       - nuxt:/app/nuxt_volume:delegated
-    logging:
-      driver: journald
-      options:
-        tag: agent
