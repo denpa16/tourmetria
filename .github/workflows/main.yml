@@ -19,4 +19,4 @@ jobs:
       - name: docker compose -f docker-compose.yml -f docker-compose.production.yml pull
         run: docker-compose pull
       - name: docker-compose up
-        run: docker compose -f docker-compose.yml -f docker-compose.production.yml up -d
+        run: docker compose -f docker-compose.yml -f docker-compose.production.yml up --remove-orphans -d
