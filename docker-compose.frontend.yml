@@ -11,7 +11,7 @@ services:
       - IMGPROXY_SITE_HOST
       - SERVER_API_URL
     volumes:
-      - nuxt_agent:/app/nuxt_volume:delegated
+      - nuxt:/app/nuxt_volume:delegated
     logging:
       driver: journald
       options:
