@@ -1,41 +1,30 @@
 version: '3.8'
 
 services:
-  db:
-    shm_size: 1g
+  nginx:
+    build:
+      context: ./nginx
     restart: always
+    volumes:
+      - local_static:/var/www/local_static/
+      - static:/var/www/static/:ro
+      - acme.sh:/acme.sh:delegated
+      - certs:/etc/nginx/certs
+    environment:
+      - ENVIRONMENT=production
+      - SITE_HOST
+      - MONITORING_HTPASSWD
+      - HTPASSWD
+
     ports:
-      - 127.0.0.1:5432:5432
-    command:
-      - "postgres"
-      - "-c"
-      - "max_connections=50"
-      - "-c"
-      - "shared_buffers=1GB" # 25% от текущей оперативной памяти
-      - "-c"
-      - "effective_cache_size=4GB"
-      - "-c"
-      - "work_mem=32MB" # shared_buffers поделить на max_connections. Если получается меньше 32МБ, то оставить 32МБ
-      - "-c"
-      - "maintenance_work_mem=512MB" # 10% от оперативной памяти
-      - "-c"
-      - "temp_file_limit=10GB"
-      - "-c"
-      - "idle_in_transaction_session_timeout=10s"
-      - "-c"
-      - "lock_timeout=1s"
-      - "-c"
-      - "statement_timeout=60s"
-      - "-c"
-      - "shared_preload_libraries=pg_stat_statements"
-      - "-c"
-      - "pg_stat_statements.max=10000"
-      - "-c"
-      - "pg_stat_statements.track=all"
+      - 80:80
+      - 443:443
+
     logging:
       driver: journald
       options:
-        tag: db
+        tag: nginx
+
 
 volumes:
   local_static:
