@@ -6,7 +6,7 @@ on:
 
 
 env:
-  POSTGRES_NAME: ${{ env.POSTGRES_NAME }}
+  POSTGRES_NAME: ${{ vars.POSTGRES_NAME }}
 
 jobs:
   build:
