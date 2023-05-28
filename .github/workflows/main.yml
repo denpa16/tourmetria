@@ -13,6 +13,7 @@ env:
   TLS_MODE: ${{ vars.TLS_MODE }}
   HTPASSWD_NODE: ${{ vars.HTPASSWD_NODE }}
   HTPASSWD: ${{ vars.HTPASSWD }}
+  SITE_HOST: ${{ vars.SITE_HOST }}
 
 jobs:
   build:
