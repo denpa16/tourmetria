@@ -5,8 +5,6 @@ services:
     build:
       context: ./nginx
     restart: always
-    depends_on:
-      - backend
     volumes:
       - local_static:/var/www/local_static/
       - static:/var/www/static/:ro
