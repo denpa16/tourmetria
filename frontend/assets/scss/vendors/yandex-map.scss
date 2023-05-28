@@ -1,0 +1,313 @@
+ymaps {
+    &._custom {
+        & ymaps {
+            font-family: $accent-font-family;
+        }
+    }
+}
+
+.map-pin {
+    $parent: &;
+
+    position: relative;
+    top: -4px;
+    left: -4px;
+    z-index: 4;
+    width: 8px;
+    height: 8px;
+    border-radius: 8px;
+
+    &._hover,
+    &._active {
+        &:after {
+            transform: translate(-50%, -50%) scale(1.5);
+        }
+
+        #{$parent}__name {
+            background-color: $blue;
+            color: $base-0;
+        }
+
+        #{$parent}__marker {
+            svg {
+                color: $base-0;
+            }
+        }
+    }
+
+    &__name {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 4px solid $blue;
+        background-color: $primary-500;
+        text-transform: uppercase;
+        white-space: nowrap;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 14px;
+        color: $base-0;
+        transform: translateX(-50%);
+        transition: all .1s ease-in-out;
+    }
+
+    &__marker {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        width: 12px;
+        height: 12px;
+        transform: translate(-50%);
+
+
+        & .r-icn-map-marker {
+            width: 12px;
+            height: 8px;
+        }
+    }
+
+    &._left {
+        #{$parent}__name {
+            bottom: -32px;
+        }
+    }
+
+    &._hide {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+.map-cluster {
+    position: relative;
+    width: 48px;
+    height: 48px;
+
+    &._hover {
+        & .map-cluster__number {
+            border: 4px solid $blue-hover;
+            background-color: $primary-600;
+        }
+    }
+
+    &__number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 4px solid $blue;
+        background-color: $primary-500;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.6;
+        color: $base-0;
+        transition: all $default-transition;
+    }
+
+    &__text {
+        padding-top: 2px;
+    }
+
+    &__marker {
+        position: absolute;
+        left: 50%;
+        top: 100%;
+        width: 12px;
+        height: 12px;
+        transform: translate(-50%);
+
+        & .r-icn-map-marker {
+            width: 12px;
+            height: 8px;
+        }
+    }
+}
+
+.infra-cluster {
+    $parent: &;
+    $circleDiam: 40px;
+    $circleRadius: calc(#{$circleDiam} / 2);
+    $donutWidth: 7px;
+
+    position: relative;
+    z-index: 4;
+    width: $circleDiam;
+    height: $circleDiam;
+    border-radius: 50%;
+    transform: translateX(-50%) translateY(-50%);
+
+    &__donut {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: calc(#{$circleDiam} - #{$donutWidth});
+        height: calc(#{$circleDiam} - #{$donutWidth});
+        background-color: $base-0;
+        border-radius: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+
+    &__text {
+        position: absolute;
+        left: 50%;
+        top: calc(50% + 2px);
+        font-size: 16px;
+        line-height: 1;
+        transform: translateX(-50%) translateY(-50%);
+    }
+}
+
+.r-location-shield {
+    $parent: &;
+
+    position: relative;
+    top: -4px;
+    left: -4px;
+    z-index: 4;
+    width: 8px;
+    height: 8px;
+    border-radius: 8px;
+    opacity: 1;
+    transform: scale(1);
+    transition: all $default-transition;
+
+    &._without-marker {
+        #{$parent}__marker {
+            display: none;
+        }
+
+        #{$parent}__image {
+            bottom: 0;
+        }
+    }
+
+    &._disabled {
+        filter: grayscale(1);
+    }
+
+    &._hover {
+        opacity: .8;
+        transform: scale(1.05);
+    }
+
+    &__image {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 4px solid $blue;
+        background-size: cover;
+        transform: translateX(-50%);
+        transition: all .1s ease-in-out;
+    }
+
+    &__marker {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        width: 12px;
+        height: 12px;
+        transform: translate(-50%);
+
+        & .r-icn-map-marker {
+            width: 12px;
+            height: 8px;
+        }
+    }
+}
+
+.project-d-location-map {
+    $parent: &;
+    $circleDiam: 32px;
+    $circleRadius: calc(#{$circleDiam} / 2);
+
+    &__marker {
+        position: relative;
+        z-index: 4;
+        width: $circleDiam;
+        height: $circleDiam;
+        transform: translateX(-50%) translateY(-50%);
+
+        &._hover,
+        &._active {
+            #{$parent}__hint {
+                transform: translateX(100%);
+                opacity: 1;
+            }
+        }
+    }
+
+    &__svg {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+
+        & > svg {
+            width: $circleRadius;
+            height: $circleRadius;
+            color: $base-0;
+        }
+    }
+
+    &__hint {
+        position: absolute;
+        background-color: $base-0;
+        padding: 8px 12px 8px calc(12px + #{$circleRadius});
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 16px;
+        border-radius: 0 1000px 1000px 0;
+        box-shadow: 0 0 4px rgba(0, 0, 0, .04), 0 4px 8px rgba(0, 0, 0, .06);
+        opacity: 0;
+        white-space: nowrap;
+        top: 0;
+        right: $circleRadius;
+        transform: translateX(90%);
+        transition: all $default-transition;
+    }
+}
+
+.end-waypoint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 4px solid $blue;
+    border-radius: 50%;
+    background-color: $primary-500;
+    transform: translateX(-50%) translateY(-50%);
+
+    &__icon {
+        display: none;
+        width: 14px;
+        height: 14px;
+        color: $base-0;
+
+        &._active {
+            display: block;
+        }
+    }
+}
+
+.js-project-pin {
+
+    &._hover {
+
+        & .map-pin__name {
+            border: 4px solid $blue-hover;
+            background-color: $primary-600;
+        }
+    }
+}

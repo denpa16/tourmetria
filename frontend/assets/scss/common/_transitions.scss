@@ -1,0 +1,204 @@
+.dropdown-enter-active {
+    transition: opacity .3s ease-in-out, transform .3s ease-in-out;
+}
+
+.dropdown-leave-active {
+    transition: opacity .15s ease-in-out, transform .15s ease-in-out;
+}
+
+.dropdown-enter,
+.dropdown-leave-to {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity .2s;
+}
+
+.fade-enter,
+.fade-leave-active {
+    opacity: 0;
+}
+
+.modal-appear-enter-active {
+    transition: transform .6s ease;
+}
+
+.modal-appear-leave-active {
+    transition: transform .6s ease;
+}
+
+.modal-appear-enter,
+.modal-appear-leave-to {
+    transform: translateX(110%);
+}
+
+.fade-slow-enter-active,
+.fade-slow-leave-active {
+    transition: opacity .3s linear;
+}
+
+.fade-slow-enter,
+.fade-slow-leave-active {
+    opacity: 0;
+}
+
+.fade-fast-enter-active,
+.fade-fast-leave-active {
+    transition: opacity .3s;
+}
+
+.fade-fast-enter,
+.fade-fast-leave-active {
+    opacity: 0;
+}
+
+.fade-slowest-enter-active,
+.fade-slowest-leave-active {
+    transition: opacity .5s linear;
+}
+
+.fade-slowest-enter,
+.fade-slowest-leave-active {
+    opacity: 0;
+}
+
+.modal-enter-active {
+    transition: transform .8s, opacity .8s;
+}
+
+.modal-leave-active {
+    transition: transform .4s, opacity .4s;
+}
+
+.modal-enter,
+.modal-leave-to {
+    opacity: 0;
+    transform: translate(0, 80px);
+}
+
+.form-appear-enter-active {
+    transition: transform .8s;
+}
+
+.form-appear-leave-active {
+    transition: transform .4s;
+}
+
+.form-appear-enter,
+.form-appear-leave-to {
+    transform: translateX(110%);
+}
+
+.fade-content-enter-active {
+    transition: opacity .4s;
+}
+
+.fade-content-enter,
+.fade-content-leave-active {
+    opacity: 0;
+}
+
+.scroll-down-enter-active,
+.scroll-down-leave-active {
+    transition: all .5s;
+}
+
+.scroll-down-enter {
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.scroll-down-leave-to {
+    opacity: 0;
+    transform: translateY(-50px);
+}
+
+.scroll-up-enter-active,
+.scroll-up-leave-active {
+    transition: all .5s;
+}
+
+.scroll-up-enter {
+    opacity: 0;
+    transform: translateY(-50px);
+}
+
+.scroll-up-leave-to {
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.scroll-left-enter-active,
+.scroll-left-leave-active {
+    transition: all .4s;
+}
+
+.scroll-left-enter {
+    opacity: 0;
+    transform: translateX(50px);
+}
+
+.scroll-left-leave-to {
+    opacity: 0;
+    transform: translateX(-50px);
+}
+
+.scroll-right-enter-active,
+.scroll-right-leave-active {
+    transition: all .4s;
+}
+
+.scroll-right-enter {
+    opacity: 0;
+    transform: translateX(-50px);
+}
+
+.scroll-right-leave-to {
+    opacity: 0;
+    transform: translateX(50px);
+}
+
+.overlay-appear-enter-active {
+    transition: all .4s;
+}
+
+.overlay-appear-leave-active {
+    opacity: 0;
+    transition: all .6s;
+}
+
+.overlay-appear-enter {
+    opacity: 0;
+}
+
+.dropdown-bottom-enter-active {
+    transition: opacity .3s ease-in-out, transform .3s ease-in-out;
+}
+
+.dropdown-bottom-leave-active {
+    transition: opacity .15s ease-in-out, transform .15s ease-in-out;
+}
+
+.dropdown-bottom-enter,
+.dropdown-bottom-leave-active {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+.list-fade-down-enter,
+.list-fade-down-leave-to {
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
+.list-fade-down-leave-active {
+    position: absolute;
+}
+
+.list-fade-enter,
+.list-fade-leave-to {
+    opacity: 0;
+}
