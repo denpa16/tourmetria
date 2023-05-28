@@ -1,33 +1,6 @@
 version: '3.8'
 
 services:
-  #nginx:
-  #  build:
-  #    context: ./nginx
-  #  restart: always
-  #  volumes:
-  #    - local_static:/var/www/local_static/
-  #    - static:/var/www/static/:ro
-  #    - acme.sh:/acme.sh:delegated
-  #    - certs:/etc/nginx/certs
-  #  environment:
-  #    - ENVIRONMENT=production
-  #    - SITE_HOST
-  #    - MONITORING_HTPASSWD
-  #    - HTPASSWD
-  #
-  #  ports:
-  #    - 80:80
-  #    - 443:443
-  #    - 9100:9100
-  #    - 9187:9187
-  #    - 8081:8080
-  #
-  #  logging:
-  #    driver: journald
-  #    options:
-  #      tag: nginx
-
   db:
     restart: always
     ports:

@@ -6,26 +6,8 @@ x-app_environment: &app_environment
     - POSTGRES_PORT
     - POSTGRES_NAME
     - POSTGRES_USER
-    - TLS_MODE
-    - HTPASSWD_NODE
-    - MONITORING_HTPASSWD
-    - HTPASSWD
 
 services:
-  #nginx:
-  #  volumes:
-  #    - nginx_cache:/var/lib/nginx/proxy_cache
-  #    - static:/var/www/static/
-  #  build:
-  #    context: ./nginx
-  #  ports:
-  #    - 80:80
-  #    - 443:443
-  #  environment:
-  #    - TLS_MODE
-  #    - HTPASSWD_NODE
-  #    - MONITORING_HTPASSWD
-  #    - HTPASSWD
 
   db:
     image: postgres:15.3-alpine
