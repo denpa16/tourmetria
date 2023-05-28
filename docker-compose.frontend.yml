@@ -1,18 +1,17 @@
 version: '3.7'
 
 services:
+
   frontend:
     restart: always
-    build:
-      context: ./frontend
-      args:
-        - PACKAGES_IMAGE=${NPM_PACKAGES}
-        - UI_DEMO=${UI_DEMO}
     command: npm run start
     entrypoint: ./entrypoint.production.sh
     environment:
       - IMGPROXY_SITE_HOST
-      - UI_DEMO
       - SERVER_API_URL
     volumes:
-      - nuxt:/app/nuxt_volume:delegated
+      - nuxt_agent:/app/nuxt_volume:delegated
+    logging:
+      driver: journald
+      options:
+        tag: agent
