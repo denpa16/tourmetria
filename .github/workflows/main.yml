@@ -7,6 +7,9 @@ on:
 
 env:
   POSTGRES_NAME: ${{ vars.POSTGRES_NAME }}
+  POSTGRES_PORT: ${{ vars.POSTGRES_PORT }}
+  POSTGRES_USER: ${{ vars.POSTGRES_USER }}
+  POSTGRES_PASSWORD: ${{ vars.POSTGRES_PASSWORD }}
 
 jobs:
   build:
