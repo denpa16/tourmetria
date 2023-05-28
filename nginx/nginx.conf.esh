@@ -98,16 +98,9 @@ server {
         proxy_pass "https://storage.yandexcloud.net/neometry-media/media/$storageUrl";
     }
 
-    <% if [ "$PDF_AUTH" = "on" ]; then -%>
-        location ~ ^/pdf/(.*)$ {
-            proxy_pass "http://pdf.idacloud.ru/pdf/$scheme://<%= $BASIC_AUTH %>@$host/$1?$args";
-        }
-    <% else -%>
-        location ~ ^/pdf/(.*)$ {
+    location ~ ^/pdf/(.*)$ {
             proxy_pass "http://pdf.idacloud.ru/pdf/$scheme://$host/$1?$args";
     }
-    <% fi; -%>
-
 
     location /.well-known/acme-challenge/ {
         root /var/www/local_static/;
