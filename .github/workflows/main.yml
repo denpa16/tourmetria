@@ -14,6 +14,8 @@ env:
   HTPASSWD_NODE: ${{ vars.HTPASSWD_NODE }}
   HTPASSWD: ${{ vars.HTPASSWD }}
   SITE_HOST: ${{ vars.SITE_HOST }}
+  SERVER_API_URL: ${{ vars.SERVER_API_URL }}
+  PROXY_URL: ${{ vars.PROXY_URL }}
 
 jobs:
   build:
@@ -35,6 +37,6 @@ jobs:
       - name: docker system prune -f
         run: docker system prune -f
       - name: docker compose pull
-        run: docker-compose -f docker-compose.yml -f docker-compose.production.yml pull
+        run: docker-compose -f docker-compose.yml -f docker-compose.production.yml -f docker-compose.frontend.yml pull
       - name: docker-compose up
-        run: docker-compose -f docker-compose.yml -f docker-compose.production.yml up --remove-orphans -d
+        run: docker-compose -f docker-compose.yml -f docker-compose.production.yml -f docker-compose.frontend.yml up --remove-orphans -d

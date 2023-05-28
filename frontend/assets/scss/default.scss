@@ -1,0 +1,72 @@
+.container {
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0 $aside-padding;
+
+    @include respond-to(tablet) {
+        padding: 0 $aside-padding-tablet;
+    }
+
+    @include respond-to(mobile) {
+        padding: 0 $aside-padding-mobile;
+    }
+}
+
+.anchor {
+    position: absolute;
+    top: calc(-1 * #{$header-h} - #{$anchor-offset});
+
+    @include respond-to(tablet) {
+        top: calc(-1 * #{$header-h-tablet} - #{$anchor-offset});
+    }
+
+    @include respond-to(mobile) {
+        top: calc(-1 * #{$header-h-mobile} - #{$anchor-offset});
+    }
+}
+
+.page {
+    padding-top: $header-h;
+
+    @include respond-to(tablet) {
+        padding-top: $header-h-tablet;
+    }
+
+    @include respond-to(mobile) {
+        padding-top: $header-h-mobile;
+    }
+}
+
+.lazy-image {
+    opacity: 0;
+    transition: opacity .3s ease;
+
+    &[lazy="loaded"] {
+        opacity: 1;
+    }
+}
+
+.scroll-lock {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    max-height: 100vh;
+    /*stylelint-disable*/
+    -webkit-overflow-scrolling: none;
+    /*stylelint-enable*/
+
+    overscroll-behavior: none;
+    touch-action: none;
+}
+
+.print-page {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-flow: column nowrap;
+    width: $pdf-width;
+    height: $pdf-height;
+    break-after: page;
+}
