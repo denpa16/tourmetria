@@ -98,10 +98,6 @@ server {
         proxy_pass "https://storage.yandexcloud.net/neometry-media/media/$storageUrl";
     }
 
-    location ~ ^/pdf/(.*)$ {
-            proxy_pass "http://pdf.idacloud.ru/pdf/$scheme://$host/$1?$args";
-    }
-
     location /.well-known/acme-challenge/ {
         root /var/www/local_static/;
     }
