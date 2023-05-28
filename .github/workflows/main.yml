@@ -10,6 +10,9 @@ env:
   POSTGRES_PORT: ${{ vars.POSTGRES_PORT }}
   POSTGRES_USER: ${{ vars.POSTGRES_USER }}
   POSTGRES_PASSWORD: ${{ vars.POSTGRES_PASSWORD }}
+  TLS_MODE: ${{ vars.TLS_MODE }}
+  HTPASSWD_NODE: ${{ vars.HTPASSWD_NODE }}
+  HTPASSWD: ${{ vars.HTPASSWD }}
 
 jobs:
   build:
