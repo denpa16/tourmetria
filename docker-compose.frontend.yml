@@ -1,9 +1,10 @@
 version: '3.7'
 
 services:
-
   frontend:
     restart: always
+    build:
+      context: ./frontend
     command: npm run start
     entrypoint: ./entrypoint.production.sh
     environment:
