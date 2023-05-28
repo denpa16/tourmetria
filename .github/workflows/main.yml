@@ -30,7 +30,7 @@ jobs:
         run: docker compose down
       - name: docker system prune -f
         run: docker system prune -f
-      - name: docker compose -f docker-compose.yml -f docker-compose.production.yml pull
+      - name: docker-compose pull
         run: docker-compose pull
       - name: docker-compose up
-        run: docker compose -f docker-compose.yml -f docker-compose.production.yml up --remove-orphans -d
+        run: docker-compose up --remove-orphans -d
