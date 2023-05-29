@@ -26,11 +26,40 @@ services:
       options:
         tag: nginx
 
+  backend:
+    restart: always
+    build:
+      context: ./backend
+      args:
+        POETRY_PARAMS: "--no-dev"
+    entrypoint: ./entrypoint.production.sh
+    command: >
+      gunicorn config.wsgi:application -w ${GUNICORN_WORKERS:-5} --keep-alive 120 -b 0.0.0.0:8000
+      --max-requests 10000 --max-requests-jitter 1000 --access-logfile - --error-logfile -
+      --access-logformat '{"date":"%(t)s","method":"%(m)s","path":"%(U)s","query":"%(q)s","protocol":"%(H)s","status":%(s)s,"response_size":%(B)s,"referer":"%(f)s","user_agent":"%(a)s","time":%(D)s,"ip":"%({x-real-ip}i)s"}'
+    environment:
+      - DEBUG=False
+    depends_on:
+      - db
+    volumes:
+      - static:/app/static/:delegated
+    logging:
+      driver: journald
+      options:
+        tag: backend
+
+  redis:
+    restart: always
+    logging:
+      driver: journald
+      options:
+        tag: redis
 
 volumes:
   local_static:
+  nuxt:
   acme.sh:
   certs:
   static:
+  redisdata:
   postgresdata:
-  nuxt:
