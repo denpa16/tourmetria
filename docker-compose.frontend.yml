@@ -10,5 +10,5 @@ services:
     environment:
       - IMGPROXY_SITE_HOST
       - SERVER_API_URL
-    volumes:
-      - nuxt:/app/nuxt_volume:delegated
+#    volumes:
+#      - nuxt:/app/nuxt_volume:delegated
