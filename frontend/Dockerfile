@@ -1,7 +1,15 @@
 FROM node:16.16-alpine
-COPY /package* /app/
+
 WORKDIR /app
-RUN apk add --no-cache --virtual build-deps make gcc g++ py-pip && npm i && apk del --no-cache build-deps
-COPY / /app/
+
+RUN apk update && apk upgrade
+RUN apk add git
+
+COPY /package* /app/
+
+RUN npm install && npm cache clean --force
+
+COPY . .
+
 RUN chmod +x entrypoint.production.sh
 RUN npm run build
