@@ -5,6 +5,7 @@ services:
     restart: always
     build:
       context: ./frontend
+    image: nuxt_dev
     command: npm run start
     entrypoint: ./entrypoint.production.sh
     environment:
