@@ -5,8 +5,7 @@ services:
     restart: always
     build:
       context: ./frontend
-    command: npm run start
-    entrypoint: ./entrypoint.production.sh
+    command: node .output/server/index.mjs
     environment:
       - IMGPROXY_SITE_HOST
       - SERVER_API_URL

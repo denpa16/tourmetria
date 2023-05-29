@@ -96,7 +96,6 @@ services:
       - redis
     <<: *app_environment
 
-
   imgproxy:
     build:
       context: ./imageproxy
