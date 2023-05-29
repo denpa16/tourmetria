@@ -24,17 +24,17 @@ jobs:
       - name: checkout repo
         uses: actions/checkout@v3
 
-  #test:
-  #  runs-on: self-hosted
-  #  steps:
-  #    - name: checkout repo
-  #      uses: actions/checkout@v3
-  #    - name: docker-compose down
-  #      run: docker compose down
-  #    - name: docker system prune -f
-  #      run: docker system prune -f
-  #    - name: docker compose test
-  #      run: docker-compose -f docker-compose.yml -f docker-compose.test.yml run --rm backend /bin/sh -c "pytest -p no:warnings --cov-report term:skip-covered"
+  test:
+    runs-on: self-hosted
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v3
+      - name: docker-compose down
+        run: docker compose down
+      - name: docker system prune -f
+        run: docker system prune -f
+      - name: docker compose test
+        run: docker-compose -f docker-compose.yml -f docker-compose.test.yml run --rm backend /bin/sh -c "pytest -p no:warnings --cov-report term:skip-covered"
 
   deploy:
     runs-on: self-hosted
