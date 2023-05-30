@@ -11,5 +11,5 @@ services:
       - SERVER_API_URL
     ports:
       - "3000:3000"
-#    volumes:
-#      - nuxt:/app/nuxt_volume:delegated
+    volumes:
+      - nuxt:/app/nuxt_volume:delegated

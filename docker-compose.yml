@@ -119,3 +119,4 @@ volumes:
   redisdata:
   postgresdata:
   nginx_cache:
+  nuxt:
