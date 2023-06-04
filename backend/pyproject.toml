@@ -28,6 +28,9 @@ phonenumbers = "^8.12.29"
 django-phonenumber-field = "5.2.*"
 django-admin-list-filter-dropdown = "~1.0.3"
 
+# Data
+xmltodict = "0.13.0"
+
 # Rest
 djangorestframework = "3.14.*"
 django-filter = "22.*"
