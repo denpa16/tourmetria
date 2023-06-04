@@ -72,7 +72,7 @@ services:
   celery:
     build:
       context: ./backend
-    command: celery -A config worker -l info -c 1 -n celery@dats.com -Q celery
+    command: celery -A config worker -l info -c 1 -n celery@dats.com --without-gossip --without-mingle -Q celery
     depends_on:
       - db
       - redis
@@ -90,7 +90,7 @@ services:
   celery-important:
     build:
       context: ./backend
-    command: celery -A config worker -l info -E -Q important
+    command: celery -A config worker -l info -E  --without-gossip --without-mingle -Q important
     depends_on:
       - db
       - redis
