@@ -13,10 +13,7 @@ class CountryDataConverter(BaseConverter):
         """
         Очистка данных для создания объекта
         """
-        has_tours_map = {
-            "Да": True,
-            "Нет": False
-        }
+        has_tours_map = {"Да": True, "Нет": False}
 
         ref_id = self.data["id"]
         title_ru = self.data["title_ru"]
@@ -43,10 +40,7 @@ class CountryDataConverter(BaseConverter):
         """
         Очистка данных для обновления объекта
         """
-        has_tours_map = {
-            "Да": True,
-            "Нет": False
-        }
+        has_tours_map = {"Да": True, "Нет": False}
 
         ref_id = self.data["id"]
         title_ru = self.data["title_ru"]

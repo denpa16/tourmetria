@@ -11,4 +11,5 @@ class AirportAdmin(admin.ModelAdmin):
     Аэропорт
 
     """
+
     pass

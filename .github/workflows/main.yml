@@ -34,15 +34,23 @@ jobs:
   #      run: docker-compose -f docker-compose.yml -f docker-compose.test.yml run --rm backend /bin/sh -c "pytest -p no:warnings --cov-report term:skip-covered"
 
 
-  deploy:
+  down:
     runs-on: self-hosted
+    #needs: test
     steps:
       - name: checkout repo
         uses: actions/checkout@v3
       - name: down
         run: docker-compose down
       - name: prune
-        run: docker system prune -f
+        run: docker system prune -a
+
+  deploy:
+    runs-on: self-hosted
+    needs: down
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v3
       - name: docker compose pull
         run: docker-compose -f docker-compose.yml -f docker-compose.production.yml -f docker-compose.frontend.yml pull
       - name: docker-compose up

@@ -6,10 +6,9 @@ class City(models.Model):
     Город
 
     """
+
     country = models.ForeignKey(
-        "countries.Country",
-        verbose_name="Страна",
-        on_delete=models.CASCADE
+        "countries.Country", verbose_name="Страна", on_delete=models.CASCADE
     )
     ref_id = models.CharField(
         verbose_name="Внешний ID",
@@ -32,7 +31,7 @@ class City(models.Model):
     update_date = models.DateTimeField(verbose_name="Последнее обновление", null=True, blank=True)
 
     class Meta:
-        verbose_name = "Город",
+        verbose_name = ("Город",)
         verbose_name_plural = "Города"
 
     def __str__(self):

@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "bg.apps.BgConfig",
     "countries.apps.CountriesConfig",
     "cities.apps.CitiesConfig",
+    "hotels.apps.HotelsConfig",
 ]
 
 MIDDLEWARE = [

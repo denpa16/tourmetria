@@ -11,4 +11,5 @@ class CountryAdmin(admin.ModelAdmin):
     Страна
 
     """
+
     pass

@@ -11,4 +11,5 @@ class CityAdmin(admin.ModelAdmin):
     Город
 
     """
+
     pass
