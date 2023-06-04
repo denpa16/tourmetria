@@ -1,0 +1,1 @@
+from .accomodation import Accomodation

@@ -81,7 +81,7 @@ services:
   celery-beat:
     build:
       context: ./backend
-    command: celery -A config worker -B
+    command: celery -A config worker -l info -E --without-gossip --without-mingle -Q bg
     depends_on:
       - db
       - redis

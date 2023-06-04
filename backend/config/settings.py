@@ -41,10 +41,16 @@ INSTALLED_APPS = [
     "rest_framework",
     "location_field.apps.DefaultConfig",
     "djcelery_email",
-    # apps
+    # main apps
     "users.apps.UserConfig",
     "common.apps.CommonConfig",
     "common.drf_tracking.apps.RestFrameworkTrackingConfig",
+    # apps
+    "airports.apps.AirportsConfig",
+    "accomodations.apps.AccomodationsConfig",
+    "bg.apps.BgConfig",
+    "countries.apps.CountriesConfig",
+    "cities.apps.CitiesConfig",
 ]
 
 MIDDLEWARE = [
