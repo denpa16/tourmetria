@@ -49,4 +49,3 @@ class AirportViewSet(ReadOnlyModelViewSet):
         bg_client = BGClient()
         accomodations = bg_client.get_accomodations()
         return Response(accomodations)
-

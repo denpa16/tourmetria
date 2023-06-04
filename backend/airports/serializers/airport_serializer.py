@@ -10,6 +10,4 @@ class AirportSerializer(ModelSerializer):
 
     class Meta:
         model = Airport
-        fields = (
-            "id",
-        )
+        fields = ("id",)

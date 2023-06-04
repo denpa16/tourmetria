@@ -46,12 +46,12 @@ class BGClient:
         return response
 
     def api_request(
-            self,
-            url: str,
-            method: str,
-            params: Any = None,
-            data: Any = None,
-            headers: Any = None,
+        self,
+        url: str,
+        method: str,
+        params: Any = None,
+        data: Any = None,
+        headers: Any = None,
     ) -> Any:
         if headers is None:
             headers = {}
@@ -72,7 +72,9 @@ class BGClient:
             return None
 
     def auth(self):
-        self.session.post(url=BGUrls.login, data={"login": "deeptrip", "pwd": "fU3,9448$wDlxgfN#iHwO"})
+        self.session.post(
+            url=BGUrls.login, data={"login": "deeptrip", "pwd": "fU3,9448$wDlxgfN#iHwO"}
+        )
         self.session.cookies.get_dict()
 
     def get_countries(self):
