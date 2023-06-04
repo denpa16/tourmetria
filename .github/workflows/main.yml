@@ -36,10 +36,13 @@ jobs:
 
   deploy:
     runs-on: self-hosted
-    #needs: test
     steps:
       - name: checkout repo
         uses: actions/checkout@v3
+      - name: down
+        run: docker-compose down
+      - name: prune
+        run: docker system prune -f
       - name: docker compose pull
         run: docker-compose -f docker-compose.yml -f docker-compose.production.yml -f docker-compose.frontend.yml pull
       - name: docker-compose up
