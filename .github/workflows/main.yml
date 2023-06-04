@@ -18,11 +18,11 @@ env:
   PROXY_URL: ${{ vars.PROXY_URL }}
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout repo
-        uses: actions/checkout@v3
+  #build:
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #    - name: checkout repo
+  #      uses: actions/checkout@v3
 
   #test:
   #  runs-on: self-hosted
