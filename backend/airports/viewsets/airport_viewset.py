@@ -41,6 +41,16 @@ class AirportViewSet(ReadOnlyModelViewSet):
         return Response(cities)
 
     @action(detail=False, methods=("GET",))
+    def bg_hotels(self, request, *args, **kwargs):
+        """
+        БГ отели
+
+        """
+        bg_client = BGClient()
+        hotels = bg_client.get_hotels()
+        return Response(hotels)
+
+    @action(detail=False, methods=("GET",))
     def bg_accomodations(self, request, *args, **kwargs):
         """
         БГ варинты размещения
