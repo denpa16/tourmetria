@@ -1,19 +1,17 @@
 from django.utils import timezone
 from bg.converters import BaseConverter
 
+from countries.models import Country
 
-class CountryDataConverter(BaseConverter):
+
+class CityDataConverter(BaseConverter):
     """
-    Конвертер данных для создания страны
+    Конвертер данных для создания города
     """
 
     UPDATE_FIELDS = (
         "title_ru",
         "title_en",
-        "code",
-        "alpha",
-        "has_tours",
-        "currency",
         "update_date",
     )
 
@@ -21,24 +19,17 @@ class CountryDataConverter(BaseConverter):
         """
         Очистка данных для создания объекта
         """
-        has_tours_map = {"Да": True, "Нет": False}
 
         ref_id = self.data["id"]
         title_ru = self.data["title_ru"]
         title_en = self.data["title_en"]
-        code = self.data["code"]
-        alpha = self.data["alpha3"]
-        has_tours = has_tours_map.get(self.data.get("tours", False), False)
-        currency = self.data["site_cur"]
+        country = self.get_country(self.data["country"])
 
         clean_data = {
             "ref_id": ref_id,
             "title_ru": title_ru,
             "title_en": title_en,
-            "code": code,
-            "alpha": alpha,
-            "has_tours": has_tours,
-            "currency": currency,
+            "country": country,
             "update_date": timezone.now(),
         }
 
@@ -48,25 +39,30 @@ class CountryDataConverter(BaseConverter):
         """
         Очистка данных для обновления объекта
         """
-        has_tours_map = {"Да": True, "Нет": False}
 
         ref_id = self.data["id"]
         title_ru = self.data["title_ru"]
         title_en = self.data["title_en"]
-        code = self.data["code"]
-        alpha = self.data["alpha3"]
-        has_tours = has_tours_map.get(self.data.get("tours", False), False)
-        currency = self.data["site_cur"]
+        country = self.get_country(self.data["country"])
 
         clean_data = {
             "ref_id": ref_id,
             "title_ru": title_ru,
             "title_en": title_en,
-            "code": code,
-            "alpha": alpha,
-            "has_tours": has_tours,
-            "currency": currency,
+            "country": country,
             "update_date": timezone.now(),
         }
 
         return clean_data
+
+    @staticmethod
+    def get_country(country_id: str):
+        """
+        Получение страны
+
+        """
+        try:
+            country = Country.objects.get(ref_id=country_id)
+        except Country.DoesNotExist:
+            country = None
+        return country

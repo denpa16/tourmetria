@@ -4,12 +4,18 @@ from bg.services import BGClient
 
 from bg.converters import (
     CountryDataConverter,
+    CityDataConverter,
+    HotelDataConverter,
 )
 from bg.loaders import (
     CountryLoader,
+    CityLoader,
+    HotelLoader,
 )
 
 from countries.models import Country
+from cities.models import City
+from hotels.models import Hotel
 
 
 @task_logging
@@ -22,6 +28,8 @@ def uploading_data_from_crm() -> str:
 
     loaders = [
         CountryLoader(model=Country, converter=CountryDataConverter, client=client),
+        CityLoader(model=City, converter=CityDataConverter, client=client),
+        HotelLoader(model=Hotel, converter=HotelDataConverter, client=client),
     ]
 
     updated = 0
