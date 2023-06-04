@@ -43,18 +43,22 @@ class BGClient:
         if params is None:
             params = {}
         if method == "POST":
-            response = self.session.post(url=url, params=params, data=data, headers=headers)
+            response = self.session.post(
+                url=url, params=params, data=data, headers=headers, timeout=80
+            )
         else:
-            response = self.session.get(url=url, params=params, data=data, headers=headers)
+            response = self.session.get(
+                url=url, params=params, data=data, headers=headers, timeout=80
+            )
         return response
 
     def api_request(
-            self,
-            url: str,
-            method: str,
-            params: Any = None,
-            data: Any = None,
-            headers: Any = None,
+        self,
+        url: str,
+        method: str,
+        params: Any = None,
+        data: Any = None,
+        headers: Any = None,
     ) -> Any:
         if headers is None:
             headers = {}
@@ -108,9 +112,9 @@ class BGClient:
         if response is not None:
             data_dict = xmltodict.parse(response.content)
             json_data = json.dumps(data_dict)
-            formatted_data = json_data.replace("@", '')
+            formatted_data = json_data.replace("@", "")
             data = json.loads(formatted_data)
-            return data
+            return data["hotels"]["hotel"]
         else:
             return []
 

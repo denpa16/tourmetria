@@ -9,5 +9,10 @@ class HotelAdmin(admin.ModelAdmin):
     Отели
 
     """
-
-    pass
+    list_display = (
+        "__str__",
+        "city",
+        "country",
+        "stars",
+        "update_date",
+    )

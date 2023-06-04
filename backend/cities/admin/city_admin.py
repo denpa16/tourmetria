@@ -12,4 +12,7 @@ class CityAdmin(admin.ModelAdmin):
 
     """
 
-    pass
+    list_display = (
+        "__str__",
+        "country",
+    )

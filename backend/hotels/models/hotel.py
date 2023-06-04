@@ -23,6 +23,12 @@ class Hotel(models.Model):
         "countries.Country", verbose_name="Страна", on_delete=models.CASCADE
     )
     city = models.ForeignKey("cities.City", verbose_name="Город", on_delete=models.CASCADE)
+    stars = models.PositiveIntegerField(
+        verbose_name="Количество звёзд",
+        blank=True,
+        null=True,
+    )
+    update_date = models.DateTimeField(verbose_name="Последнее обновление", null=True, blank=True)
 
     class Meta:
         verbose_name = "Отель"
