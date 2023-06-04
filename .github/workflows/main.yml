@@ -34,17 +34,36 @@ jobs:
   #      run: docker-compose -f docker-compose.yml -f docker-compose.test.yml run --rm backend /bin/sh -c "pytest -p no:warnings --cov-report term:skip-covered"
 
 
+  #deploy:
+  #  runs-on: self-hosted
+  #  needs: build
+  #  steps:
+  #    - name: checkout repo
+  #      uses: actions/checkout@v3
+  #    - name: down
+  #      run: docker-compose down
+  #    - name: prune
+  #      run: docker system prune -a
+  #    - name: docker compose pull
+  #      run: docker-compose -f docker-compose.yml -f docker-compose.production.yml -f docker-compose.frontend.yml pull
+  #    - name: docker-compose up
+  #      run: docker-compose -f docker-compose.yml -f docker-compose.production.yml -f docker-compose.frontend.yml up --remove-orphans -d
+
+
+  prepare-environment:
+    runs-on: self-hosted
+    needs: test
+    steps:
+      - name: Stop and remove containers, networks
+        run: docker-compose down
+      - name: Remove unused data
+        run: docker system prune -a -f
+
   deploy:
     runs-on: self-hosted
-    needs: build
+    needs: prepare-environment
     steps:
       - name: checkout repo
         uses: actions/checkout@v3
-      - name: down
-        run: docker-compose down
-      - name: prune
-        run: docker system prune -a
-      - name: docker compose pull
-        run: docker-compose -f docker-compose.yml -f docker-compose.production.yml -f docker-compose.frontend.yml pull
       - name: docker-compose up
         run: docker-compose -f docker-compose.yml -f docker-compose.production.yml -f docker-compose.frontend.yml up --remove-orphans -d
