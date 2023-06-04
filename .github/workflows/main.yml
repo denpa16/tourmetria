@@ -52,7 +52,7 @@ jobs:
 
   prepare-environment:
     runs-on: self-hosted
-    needs: test
+    #needs: test
     steps:
       - name: Stop and remove containers, networks
         run: docker-compose down
