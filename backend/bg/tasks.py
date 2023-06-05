@@ -30,9 +30,9 @@ def uploading_data_from_crm() -> str:
     client = BGClient()
 
     loaders = [
-        CountryLoader(model=Country, converter=CountryDataConverter, client=client),
-        CityLoader(model=City, converter=CityDataConverter, client=client),
-        HotelLoader(model=Hotel, converter=HotelDataConverter, client=client),
+        #CountryLoader(model=Country, converter=CountryDataConverter, client=client),
+        #CityLoader(model=City, converter=CityDataConverter, client=client),
+        #HotelLoader(model=Hotel, converter=HotelDataConverter, client=client),
         AccomodationLoader(model=Accomodation, converter=AccomodationDataConverter, client=client),
     ]
 

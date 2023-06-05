@@ -10,6 +10,7 @@ class AccomodationDataConverter(BaseConverter):
     UPDATE_FIELDS = (
         "name",
         "name_full",
+        "name_site",
         "AD_number",
         "CHD_number",
         "infnum",
@@ -48,7 +49,7 @@ class AccomodationDataConverter(BaseConverter):
         """
 
         name = self.data["name"]
-        name_full = self.data["name_full"]
+        name_full = self.data["full_name"]
         name_site = self.data["site_name"]
         AD_number = self.data["AD_number"]
         CHD_number = self.data["CHD_number"]

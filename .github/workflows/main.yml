@@ -16,6 +16,8 @@ env:
   SITE_HOST: ${{ vars.SITE_HOST }}
   SERVER_API_URL: ${{ vars.SERVER_API_URL }}
   PROXY_URL: ${{ vars.PROXY_URL }}
+  BG_LOGIN: ${{ vars.BG_LOGIN }}
+  BG_PASSWORD: ${{ vars.BG_PASSWORD }}
 
 jobs:
   build:
