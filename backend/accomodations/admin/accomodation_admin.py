@@ -11,4 +11,5 @@ class AccomodationAdmin(admin.ModelAdmin):
     Вариант размещения
 
     """
+
     pass
