@@ -6,16 +6,19 @@ from bg.converters import (
     CountryDataConverter,
     CityDataConverter,
     HotelDataConverter,
+    AccomodationDataConverter,
 )
 from bg.loaders import (
     CountryLoader,
     CityLoader,
     HotelLoader,
+    AccomodationLoader,
 )
 
 from countries.models import Country
 from cities.models import City
 from hotels.models import Hotel
+from accomodations.models import Accomodation
 
 
 @task_logging
@@ -30,6 +33,7 @@ def uploading_data_from_crm() -> str:
         CountryLoader(model=Country, converter=CountryDataConverter, client=client),
         CityLoader(model=City, converter=CityDataConverter, client=client),
         HotelLoader(model=Hotel, converter=HotelDataConverter, client=client),
+        AccomodationLoader(model=Accomodation, converter=AccomodationDataConverter, client=client),
     ]
 
     updated = 0

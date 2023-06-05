@@ -6,26 +6,30 @@ class Accomodation(models.Model):
     Варианты размещения
 
     """
+
     ref_id = models.CharField(
         verbose_name="Внешний ID",
         max_length=255,
         blank=True,
         null=True,
-        unique=True,
     )
     name = models.CharField(
         verbose_name="Название",
         max_length=255,
         blank=True,
         null=True,
-        unique=True,
     )
     name_full = models.CharField(
         verbose_name="Расшифровка названия",
         max_length=255,
         blank=True,
         null=True,
-        unique=True,
+    )
+    name_site = models.CharField(
+        verbose_name="Название на сайте БГ",
+        max_length=255,
+        blank=True,
+        null=True,
     )
     AD_number = models.PositiveIntegerField(
         verbose_name="Количество взрослых",
