@@ -31,7 +31,7 @@ class City(models.Model):
     update_date = models.DateTimeField(verbose_name="Последнее обновление", null=True, blank=True)
 
     class Meta:
-        verbose_name = ("Город",)
+        verbose_name = "Город"
         verbose_name_plural = "Города"
 
     def __str__(self):
