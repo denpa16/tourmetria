@@ -6,6 +6,7 @@ on:
 
 
 env:
+  SECRET_KEY: ${{ vars.SECRET_KEY }}
   POSTGRES_NAME: ${{ vars.POSTGRES_NAME }}
   POSTGRES_PORT: ${{ vars.POSTGRES_PORT }}
   POSTGRES_USER: ${{ vars.POSTGRES_USER }}
