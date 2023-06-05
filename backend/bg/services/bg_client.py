@@ -1,14 +1,11 @@
-import datetime
-import json
-import logging
-import time
 from typing import Any
 
 import requests
-from django.core.cache import cache
 from requests import Response
 import xmltodict
 import json
+
+from django.conf import settings
 
 
 class BGUrls:
@@ -80,7 +77,7 @@ class BGClient:
 
     def auth(self):
         self.session.post(
-            url=BGUrls.login, data={"login": "deeptrip", "pwd": "fU3,9448$wDlxgfN#iHwO"}
+            url=BGUrls.login, data={"login": settings.BG_LOGIN, "pwd": settings.BG_PASSWORD}
         )
         self.session.cookies.get_dict()
 
