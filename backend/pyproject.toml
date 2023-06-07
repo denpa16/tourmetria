@@ -51,6 +51,7 @@ django-celery-email = "~3.0.0"
 # Others
 Pillow = "9.3.*"
 django-robots = "5.0.*"
+beautifulsoup4 = "4.12.*"
 
 [tool.poetry.dev-dependencies]
 django-debug-toolbar = "^3.2.1"

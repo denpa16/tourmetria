@@ -6,8 +6,9 @@ from hotels.models import Hotel, HotelImage
 class HotelImageInline(admin.StackedInline):
     """
     Изобаржения отеля
-    
+
     """
+
     model = HotelImage
     extra = 0
 
@@ -18,6 +19,7 @@ class HotelAdmin(admin.ModelAdmin):
     Отели
 
     """
+
     list_display = (
         "__str__",
         "city",
@@ -26,6 +28,4 @@ class HotelAdmin(admin.ModelAdmin):
         "update_date",
     )
 
-    inlines = (
-        HotelImageInline,
-    )
+    inlines = (HotelImageInline,)

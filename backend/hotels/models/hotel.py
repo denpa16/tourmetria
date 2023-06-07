@@ -43,7 +43,10 @@ class HotelImage(models.Model):
     Изображение отеля
 
     """
-    hotel = models.ForeignKey("hotels.Hotel", verbose_name="Изображение отеля", on_delete=models.CASCADE)
+
+    hotel = models.ForeignKey(
+        "hotels.Hotel", verbose_name="Изображение отеля", on_delete=models.CASCADE
+    )
     image = models.ImageField(
         verbose_name="Изображение",
     )
