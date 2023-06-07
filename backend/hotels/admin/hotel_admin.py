@@ -1,6 +1,15 @@
 from django.contrib import admin
 
-from hotels.models import Hotel
+from hotels.models import Hotel, HotelImage
+
+
+class HotelImageInline(admin.StackedInline):
+    """
+    Изобаржения отеля
+    
+    """
+    model = HotelImage
+    extra = 0
 
 
 @admin.register(Hotel)
@@ -15,4 +24,8 @@ class HotelAdmin(admin.ModelAdmin):
         "country",
         "stars",
         "update_date",
+    )
+
+    inlines = (
+        HotelImageInline,
     )

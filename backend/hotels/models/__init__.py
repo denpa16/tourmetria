@@ -1,1 +1,1 @@
-from .hotel import Hotel
+from .hotel import Hotel, HotelImage
