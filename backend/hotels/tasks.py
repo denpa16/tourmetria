@@ -8,7 +8,7 @@ def parse_images():
 
     from hotels.models import Hotel
 
-    hotels_ref_ids = set(Hotel.objects.values_list("ref_id", flat=True)[:100])
+    hotels_ref_ids = set(Hotel.objects.values_list("ref_id", flat=True))
     for hotel_ref_id in hotels_ref_ids:
         url = f"https://bgoperator.ru/price.shtml?flt=100411293179&tid=26&code={hotel_ref_id}&action=shw"
         headers = {
