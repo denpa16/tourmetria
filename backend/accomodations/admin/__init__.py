@@ -1,1 +1,0 @@
-from .accomodation_admin import AccomodationAdmin

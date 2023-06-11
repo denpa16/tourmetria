@@ -1,1 +1,0 @@
-from .airport_serializer import AirportSerializer

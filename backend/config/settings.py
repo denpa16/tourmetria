@@ -46,12 +46,6 @@ INSTALLED_APPS = [
     "common.apps.CommonConfig",
     "common.drf_tracking.apps.RestFrameworkTrackingConfig",
     # apps
-    "airports.apps.AirportsConfig",
-    "accomodations.apps.AccomodationsConfig",
-    "bg.apps.BgConfig",
-    "countries.apps.CountriesConfig",
-    "cities.apps.CitiesConfig",
-    "hotels.apps.HotelsConfig",
 ]
 
 MIDDLEWARE = [
@@ -341,7 +335,3 @@ AWS_DEFAULT_ACL = None
 AWS_LOCATION = getenv("YND_LOCATION", "media")
 AWS_QUERYSTRING_AUTH = False
 AWS_S3_FILE_OVERWRITE = False
-
-# BG
-BG_LOGIN = getenv("BG_LOGIN")
-BG_PASSWORD = getenv("BG_PASSWORD")
