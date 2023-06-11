@@ -53,13 +53,13 @@ jobs:
   #      run: docker-compose -f docker-compose.yml -f docker-compose.production.yml -f docker-compose.frontend.yml up --remove-orphans -d
 
 
-  prepare-environment:
-    runs-on: self-hosted
-    steps:
-      - name: Stop all
-        run: docker stop $(docker ps -a -q)
-      - name: Remove unused data
-        run: docker system prune -a -f
+  #prepare-environment:
+  #  runs-on: self-hosted
+  #  steps:
+  #    - name: Stop all
+  #      run: docker stop $(docker ps -a -q)
+  #    - name: Remove unused data
+  #      run: docker system prune -a -f
 
   deploy:
     runs-on: self-hosted
