@@ -63,9 +63,10 @@ class Country(models.Model):
         verbose_name="Ранг страны", blank=True, null=True, help_text="0 - самый высокий"
     )
     tickets_included = models.BooleanField(
-        verbose_name="Объём турпакета",
+        verbose_name="Перелёт включён в стоимость тура",
         default=False,
-        help_text="Если перелёт включён в стоимость тура, параметр принимает значение “True”; в противном случае — “False”",
+        help_text="Если перелёт включён в стоимость тура, то ставится галочка; "
+                  "в противном случае — нет",
     )
     update_date = models.DateTimeField(verbose_name="Последнее обновление", null=True, blank=True)
 
