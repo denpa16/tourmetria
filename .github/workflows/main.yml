@@ -17,8 +17,9 @@ env:
   SITE_HOST: ${{ vars.SITE_HOST }}
   SERVER_API_URL: ${{ vars.SERVER_API_URL }}
   PROXY_URL: ${{ vars.PROXY_URL }}
-  BG_LOGIN: ${{ vars.BG_LOGIN }}
-  BG_PASSWORD: ${{ vars.BG_PASSWORD }}
+  SLETATRU_URL: ${{ vars.SLETATRU_URL }}
+  SLETATRU_LOGIN: ${{ vars.SLETATRU_LOGIN }}
+  SLETATRU_PASSWORD: ${{ vars.SLETATRU_PASSWORD }}
 
 jobs:
   #build:
