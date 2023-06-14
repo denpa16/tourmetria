@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     "common.apps.CommonConfig",
     "common.drf_tracking.apps.RestFrameworkTrackingConfig",
     # apps
+    "countries.apps.CountriesConfig",
+    "sletatru.apps.SletatruConfig",
 ]
 
 MIDDLEWARE = [
@@ -335,3 +337,8 @@ AWS_DEFAULT_ACL = None
 AWS_LOCATION = getenv("YND_LOCATION", "media")
 AWS_QUERYSTRING_AUTH = False
 AWS_S3_FILE_OVERWRITE = False
+
+# SLETATRU
+SLETATRU_URL = getenv("SLETATRU_URL")
+SLETATRU_LOGIN = getenv("SLETATRU_LOGIN")
+SLETATRU_PASSWORD = getenv("SLETATRU_PASSWORD")

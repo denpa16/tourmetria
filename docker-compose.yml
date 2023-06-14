@@ -28,8 +28,9 @@ x-app_environment: &app_environment
     - IMGPROXY_SITE_HOST
     - IMGPROXY_KEY
     - IMGPROXY_SALT
-    - BG_LOGIN
-    - BG_PASSWORD
+    - SLETATRU_URL
+    - SLETATRU_LOGIN
+    - SLETATRU_PASSWORD
 
 services:
   nginx:
