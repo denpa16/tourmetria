@@ -4,9 +4,9 @@ from slugify import slugify
 from sletatru.converters import BaseConverter
 
 
-class CityDataConverter(BaseConverter):
+class ResortDataConverter(BaseConverter):
     """
-    Конвертер данных для создания города
+    Конвертер данных для создания курорта
     """
 
     UPDATE_FIELDS = (

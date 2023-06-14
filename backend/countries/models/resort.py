@@ -1,9 +1,9 @@
 from django.db import models
 
 
-class City(models.Model):
+class Resort(models.Model):
     """
-    Город
+    Курорт
 
     """
 
@@ -31,19 +31,19 @@ class City(models.Model):
         null=True,
     )
     description_url = models.TextField(
-        verbose_name="Ссылка на описание города",
+        verbose_name="Ссылка на описание курорта",
         blank=True,
         null=True,
     )
     is_popular = models.BooleanField(
-        verbose_name="Популярность города",
+        verbose_name="Популярность курорта",
         default=False,
         help_text="Если курорт был признан популярным на основе статистики поисковых запросов, "
-        "сделанных на сайте sletat.ru и сайтах партнёров, поле принимает значение “True”; "
-        "в противном случае — “False”",
+        "сделанных на сайте sletat.ru и сайтах партнёров, то ставится галочка; "
+        "в противном случае — не ставится",
     )
     original_name = models.CharField(
-        verbose_name="Название города на латинице",
+        verbose_name="Название курорта на латинице",
         max_length=255,
         blank=True,
         null=True,
@@ -51,8 +51,8 @@ class City(models.Model):
     update_date = models.DateTimeField(verbose_name="Последнее обновление", null=True, blank=True)
 
     class Meta:
-        verbose_name = "Город"
-        verbose_name_plural = "Города"
+        verbose_name = "Курорт"
+        verbose_name_plural = "Курорты"
 
     def __str__(self):
         return self.name
