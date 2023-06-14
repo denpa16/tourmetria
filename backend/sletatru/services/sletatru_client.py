@@ -77,7 +77,7 @@ class SletatruClient:
         else:
             return []
 
-    def get_country_cities(self, country_ref_id):
+    def get_country_resorts(self, country_ref_id):
         logger.info(f"sletatru_cities: country {country_ref_id}")
         data = self.api_request(
             path=SletatruPaths.cities,
