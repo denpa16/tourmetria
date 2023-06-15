@@ -1,1 +1,3 @@
 from .depart_city_serializer import DepartCitySerializer
+from .country_serializer import CountrySerializer
+from .resort_serializer import ResortSerializer

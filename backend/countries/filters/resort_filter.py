@@ -1,11 +1,11 @@
 from django_filters import Filter
 from common.filters import FacetFilterSet, CharInFilter
-from countries.models import DepartCity
+from countries.models import Resort
 
 
-class DepartCityFilter(FacetFilterSet):
+class ResortFilter(FacetFilterSet):
     """
-    Города вылета
+    Курорт
 
     """
 
@@ -14,7 +14,7 @@ class DepartCityFilter(FacetFilterSet):
     country.aggregate = "country_aggregate"
 
     class Meta:
-        model = DepartCity
+        model = Resort
         fields = ()
 
     @staticmethod
