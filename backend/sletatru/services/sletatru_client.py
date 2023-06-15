@@ -90,12 +90,11 @@ class SletatruClient:
         else:
             return []
 
-    def get_country_depart_cities(self, country_ref_id):
-        logger.info(f"sletatru_depart_cities: country {country_ref_id}")
+    def get_country_depart_cities(self):
+        logger.info(f"sletatru_depart_cities")
         data = self.api_request(
             path=SletatruPaths.depart_cities,
             method=RequestMethods.get,
-            params={"countryId": country_ref_id},
         )
         if data is not None:
             return data["GetDepartCitiesResult"]["Data"]

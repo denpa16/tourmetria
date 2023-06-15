@@ -3,6 +3,8 @@ from slugify import slugify
 
 from sletatru.converters import BaseConverter
 
+from countries.models import Country
+
 
 class DepartCityDataConverter(BaseConverter):
     """
@@ -19,7 +21,7 @@ class DepartCityDataConverter(BaseConverter):
         """
         Очистка данных для создания объекта
         """
-        country = self._extra.get("country")
+        country = self.get_country(self.data["CountryId"])
         ref_id = self.data["Id"]
         name = self.data["Name"]
         slug = slugify(name)
@@ -51,3 +53,15 @@ class DepartCityDataConverter(BaseConverter):
             "update_date": timezone.now(),
         }
         return clean_data
+
+    @staticmethod
+    def get_country(country_ref_id):
+        """
+        Получение страны
+
+        """
+        try:
+            country = Country.objects.get(ref_id=country_ref_id)
+        except Country.DoesNotExist:
+            country = None
+        return country
