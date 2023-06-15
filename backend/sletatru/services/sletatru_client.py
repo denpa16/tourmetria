@@ -9,7 +9,8 @@ logger = logging.getLogger(__name__)
 
 class SletatruPaths:
     countries = "GetCountries"
-    cities = "GetCities"
+    resorts = "GetCities"
+    depart_cities = "GetDepartCities"
 
 
 class RequestMethods:
@@ -78,13 +79,25 @@ class SletatruClient:
             return []
 
     def get_country_resorts(self, country_ref_id):
-        logger.info(f"sletatru_cities: country {country_ref_id}")
+        logger.info(f"sletatru_resorts: country {country_ref_id}")
         data = self.api_request(
-            path=SletatruPaths.cities,
+            path=SletatruPaths.resorts,
             method=RequestMethods.get,
             params={"countryId": country_ref_id},
         )
         if data is not None:
             return data["GetCitiesResult"]["Data"]
+        else:
+            return []
+
+    def get_country_depart_cities(self, country_ref_id):
+        logger.info(f"sletatru_depart_cities: country {country_ref_id}")
+        data = self.api_request(
+            path=SletatruPaths.depart_cities,
+            method=RequestMethods.get,
+            params={"countryId": country_ref_id},
+        )
+        if data is not None:
+            return data["GetDepartCitiesResult"]["Data"]
         else:
             return []

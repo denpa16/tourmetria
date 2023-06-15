@@ -6,13 +6,15 @@ from django.conf import settings
 from sletatru.converters import (
     CountryDataConverter,
     ResortDataConverter,
+    DepartCityDataConverter,
 )
 from sletatru.loaders import (
     CountryLoader,
     ResortLoader,
+    DepartCityLoader,
 )
 
-from countries.models import Country, Resort
+from countries.models import Country, Resort, DepartCity
 
 
 @shared_task
@@ -31,6 +33,7 @@ def daily_uploading_data_from_crm() -> str:
     loaders = [
         CountryLoader(model=Country, converter=CountryDataConverter, client=client),
         ResortLoader(model=Resort, converter=ResortDataConverter, client=client),
+        DepartCityLoader(model=DepartCity, converter=DepartCityDataConverter, client=client),
     ]
 
     updated = 0
