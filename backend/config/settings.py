@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     # apps
     "countries.apps.CountriesConfig",
     "sletatru.apps.SletatruConfig",
+    "hotels.apps.HotelsConfig",
 ]
 
 MIDDLEWARE = [

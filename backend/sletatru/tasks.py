@@ -7,14 +7,19 @@ from sletatru.converters import (
     CountryDataConverter,
     ResortDataConverter,
     DepartCityDataConverter,
+    HotelCategoryDataConverter,
+    HotelDataConverter,
 )
 from sletatru.loaders import (
     CountryLoader,
     ResortLoader,
     DepartCityLoader,
+    HotelCategoryLoader,
+    HotelLoader,
 )
 
 from countries.models import Country, Resort, DepartCity
+from hotels.models import HotelCategory, Hotel
 
 
 @shared_task
@@ -31,9 +36,13 @@ def daily_uploading_data_from_crm() -> str:
     client = SletatruClient(SLETATRU_URL, SLETATRU_LOGIN, SLETATRU_PASSWORD)
 
     loaders = [
-        CountryLoader(model=Country, converter=CountryDataConverter, client=client),
-        ResortLoader(model=Resort, converter=ResortDataConverter, client=client),
-        DepartCityLoader(model=DepartCity, converter=DepartCityDataConverter, client=client),
+        # CountryLoader(model=Country, converter=CountryDataConverter, client=client),
+        # ResortLoader(model=Resort, converter=ResortDataConverter, client=client),
+        # DepartCityLoader(model=DepartCity, converter=DepartCityDataConverter, client=client),
+        # HotelCategoryLoader(
+        #    model=HotelCategory, converter=HotelCategoryDataConverter, client=client
+        # ),
+        HotelLoader(model=Hotel, converter=HotelDataConverter, client=client),
     ]
 
     updated = 0

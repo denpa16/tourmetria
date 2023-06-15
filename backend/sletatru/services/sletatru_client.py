@@ -11,6 +11,8 @@ class SletatruPaths:
     countries = "GetCountries"
     resorts = "GetCities"
     depart_cities = "GetDepartCities"
+    hotels = "GetHotels"
+    hotels_categories = "GetHotelStars"
 
 
 class RequestMethods:
@@ -98,5 +100,29 @@ class SletatruClient:
         )
         if data is not None:
             return data["GetDepartCitiesResult"]["Data"]
+        else:
+            return []
+
+    def get_hotels_categories(self, country_ref_id):
+        logger.info(f"sletatru_hotels_categories")
+        data = self.api_request(
+            path=SletatruPaths.hotels_categories,
+            method=RequestMethods.get,
+            params={"countryId": country_ref_id},
+        )
+        if data is not None:
+            return data["GetHotelStarsResult"]["Data"]
+        else:
+            return []
+
+    def get_resort_hotels(self, resort_ref_id):
+        logger.info(f"sletatru_hotels")
+        data = self.api_request(
+            path=SletatruPaths.hotels,
+            method=RequestMethods.get,
+            params={"towns": resort_ref_id},
+        )
+        if data is not None:
+            return data["GetHotelsResult"]["Data"]
         else:
             return []
