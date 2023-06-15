@@ -36,12 +36,12 @@ def daily_uploading_data_from_crm() -> str:
     client = SletatruClient(SLETATRU_URL, SLETATRU_LOGIN, SLETATRU_PASSWORD)
 
     loaders = [
-        # CountryLoader(model=Country, converter=CountryDataConverter, client=client),
-        # ResortLoader(model=Resort, converter=ResortDataConverter, client=client),
-        # DepartCityLoader(model=DepartCity, converter=DepartCityDataConverter, client=client),
-        # HotelCategoryLoader(
-        #    model=HotelCategory, converter=HotelCategoryDataConverter, client=client
-        # ),
+        CountryLoader(model=Country, converter=CountryDataConverter, client=client),
+        ResortLoader(model=Resort, converter=ResortDataConverter, client=client),
+        DepartCityLoader(model=DepartCity, converter=DepartCityDataConverter, client=client),
+        HotelCategoryLoader(
+            model=HotelCategory, converter=HotelCategoryDataConverter, client=client
+        ),
         HotelLoader(model=Hotel, converter=HotelDataConverter, client=client),
     ]
 
