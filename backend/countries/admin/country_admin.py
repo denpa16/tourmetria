@@ -10,4 +10,23 @@ class CountryAdmin(admin.ModelAdmin):
 
     """
 
-    pass
+    list_display = (
+        "__str__",
+        "id",
+        "has_tickets",
+        "hotel_is_not_in_stop",
+        "is_visa",
+        "is_pro_visa",
+        "rank",
+        "tickets_included",
+        "update_date",
+    )
+    list_filter = (
+        "has_tickets",
+        "hotel_is_not_in_stop",
+        "is_visa",
+        "is_pro_visa",
+        "rank",
+        "tickets_included",
+    )
+    search_fields = ("name",)
