@@ -3,6 +3,7 @@ from hotels.models import Hotel
 
 from .hotel_image_admin import HotelImageAdminInline
 
+
 @admin.register(Hotel)
 class HotelAdmin(admin.ModelAdmin):
     """
@@ -39,6 +40,4 @@ class HotelAdmin(admin.ModelAdmin):
             )
         )
 
-    inlines = (
-        HotelImageAdminInline,
-    )
+    inlines = (HotelImageAdminInline,)

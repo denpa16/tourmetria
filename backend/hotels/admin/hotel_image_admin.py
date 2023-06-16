@@ -7,5 +7,6 @@ class HotelImageAdminInline(admin.StackedInline):
     Изображение отеля
 
     """
+
     model = HotelImage
     extra = 0
