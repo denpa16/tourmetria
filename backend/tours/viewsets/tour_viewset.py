@@ -35,3 +35,13 @@ class TourViewSet(GenericViewSet):
     def retrieve(self, request, *args, **kwargs):
         retrieve_data = "Tour Detail"
         return Response(data=retrieve_data, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=("GET",))
+    def get_tours_dates(self, request, *args, **kwargs):
+        """
+        Список доступных дат туров
+
+        """
+        params = request.query_params
+        tours_dates = self.client.get_tours_dates(params)
+        return Response(data=tours_dates, status=status.HTTP_200_OK)

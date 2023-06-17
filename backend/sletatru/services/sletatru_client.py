@@ -14,6 +14,7 @@ class SletatruPaths:
     hotels = "GetHotels"
     hotels_categories = "GetHotelStars"
     tours = "GetTours"
+    tours_dates = "GetTourDates"
 
 
 class RequestMethods:
@@ -74,6 +75,10 @@ class SletatruClient:
         return "{}/{}".format(self.base_url, path)
 
     def get_countries(self):
+        """
+        Страны
+
+        """
         logger.info("sletatru_countries")
         data = self.api_request(path=SletatruPaths.countries, method=RequestMethods.get)
         if data is not None:
@@ -82,6 +87,10 @@ class SletatruClient:
             return []
 
     def get_country_resorts(self, country_ref_id):
+        """
+        Курорты стран
+
+        """
         logger.info(f"sletatru_resorts: country {country_ref_id}")
         data = self.api_request(
             path=SletatruPaths.resorts,
@@ -94,6 +103,10 @@ class SletatruClient:
             return []
 
     def get_country_depart_cities(self):
+        """
+        Города вылета стран
+
+        """
         logger.info(f"sletatru_depart_cities")
         data = self.api_request(
             path=SletatruPaths.depart_cities,
@@ -105,6 +118,10 @@ class SletatruClient:
             return []
 
     def get_hotels_categories(self, country_ref_id):
+        """
+        Категории отелей
+
+        """
         logger.info(f"sletatru_hotels_categories")
         data = self.api_request(
             path=SletatruPaths.hotels_categories,
@@ -117,6 +134,10 @@ class SletatruClient:
             return []
 
     def get_resort_hotels(self, resort_ref_id):
+        """
+        Отели курорта
+
+        """
         logger.info(f"sletatru_hotels")
         data = self.api_request(
             path=SletatruPaths.hotels,
@@ -129,6 +150,10 @@ class SletatruClient:
             return []
 
     def get_tours(self, params):
+        """
+        Туры
+
+        """
         logger.info("sletatru_tours")
         path = SletatruPaths.tours
         query_params = "&".join([f"{key}={value}" for key, value in params.items()])
@@ -145,6 +170,23 @@ class SletatruClient:
         if data is not None:
             try:
                 return data["GetToursResult"]["Data"]["aaData"]
+            except Exception:
+                return []
+        else:
+            return []
+
+    def get_tours_dates(self, params):
+        """
+        Доступные даты туров
+
+        """
+        logger.info("sletatru_tours_dates")
+        data = self.api_request(
+            path=SletatruPaths.tours_dates, method=RequestMethods.get, params=params
+        )
+        if data is not None:
+            try:
+                return data["GetTourDatesResult"]["Data"]["dates"]
             except Exception:
                 return []
         else:
