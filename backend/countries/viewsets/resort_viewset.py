@@ -13,6 +13,9 @@ class ResortViewSet(SpecsFacetsMixin, ReadOnlyModelViewSet):
 
     """
 
+    lookup_field = "ref_id"
+    lookup_url_kwargs = "ref_id"
+
     queryset = Resort.objects.all()
     serializer_class = ResortSerializer
     filterset_class = ResortFilter

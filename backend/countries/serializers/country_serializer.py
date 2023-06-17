@@ -17,5 +17,5 @@ class CountrySerializer(ModelSerializer):
         fields = (
             "id",
             "name",
-            "slug",
+            "ref_id",
         )

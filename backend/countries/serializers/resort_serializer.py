@@ -17,5 +17,5 @@ class ResortSerializer(ModelSerializer):
         fields = (
             "id",
             "name",
-            "slug",
+            "ref_id",
         )

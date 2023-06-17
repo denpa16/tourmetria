@@ -17,5 +17,5 @@ class DepartCitySerializer(ModelSerializer):
         fields = (
             "id",
             "name",
-            "slug",
+            "ref_id",
         )

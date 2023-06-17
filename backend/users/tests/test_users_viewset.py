@@ -1,5 +1,6 @@
 import pytest
 
+
 class TestUserViewSet:
     """
     Тест пользователя
