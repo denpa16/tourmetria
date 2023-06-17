@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "countries.apps.CountriesConfig",
     "sletatru.apps.SletatruConfig",
     "hotels.apps.HotelsConfig",
+    "tours.apps.ToursConfig",
 ]
 
 MIDDLEWARE = [

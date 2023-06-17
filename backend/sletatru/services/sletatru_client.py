@@ -13,6 +13,7 @@ class SletatruPaths:
     depart_cities = "GetDepartCities"
     hotels = "GetHotels"
     hotels_categories = "GetHotelStars"
+    tours = "GetTours"
 
 
 class RequestMethods:
@@ -124,5 +125,27 @@ class SletatruClient:
         )
         if data is not None:
             return data["GetHotelsResult"]["Data"]
+        else:
+            return []
+
+    def get_tours(self, params):
+        logger.info("sletatru_tours")
+        path = SletatruPaths.tours
+        query_params = "&".join([f"{key}={value}" for key, value in params.items()])
+        url = self.get_url(path)
+        headers = {
+            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/51.0.2704.106 Safari/537.36 OPR/38.0.2220.41",
+            "Content-Type": "application/json",
+            "Referer": url + query_params,
+        }
+        data = self.api_request(
+            path=SletatruPaths.tours, method=RequestMethods.get, params=params, headers=headers
+        )
+        if data is not None:
+            try:
+                return data["GetToursResult"]["Data"]["aaData"]
+            except Exception:
+                return []
         else:
             return []

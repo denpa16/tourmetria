@@ -72,17 +72,19 @@ class HotelFilter(FacetFilterSet):
     @staticmethod
     def get_popularity_level_specs(queryset):
         levels = (
-            queryset
-            .order_by("popularity_level")
+            queryset.order_by("popularity_level")
             .distinct("popularity_level")
             .values_list("popularity_level", flat=True)
         )
         popularity_level_map = {
             0: "Низкая популярность",
             1: "Средняя популярность",
-            2: "Высокая популярность"
+            2: "Высокая популярность",
         }
-        return [{"value": level, "label": popularity_level_map.get(level, "Средняя популярность")} for level in levels]
+        return [
+            {"value": level, "label": popularity_level_map.get(level, "Средняя популярность")}
+            for level in levels
+        ]
 
     @staticmethod
     def popularity_level_aggregate(queryset):
@@ -95,8 +97,7 @@ class HotelFilter(FacetFilterSet):
     @staticmethod
     def get_category_specs(queryset):
         categories = (
-            queryset
-            .order_by("category__name")
+            queryset.order_by("category__name")
             .distinct("category__name")
             .values_list("category__name", flat=True)
         )
@@ -112,7 +113,10 @@ class HotelFilter(FacetFilterSet):
             "2*": "2 звезды",
             "1*": "1 звезда",
         }
-        return [{"value": category, "label": category_map.get(category, "Без звезд")} for category in categories]
+        return [
+            {"value": category, "label": category_map.get(category, "Без звезд")}
+            for category in categories
+        ]
 
     @staticmethod
     def category_aggregate(queryset):
