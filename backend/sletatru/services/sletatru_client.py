@@ -15,6 +15,7 @@ class SletatruPaths:
     hotels_categories = "GetHotelStars"
     tours = "GetTours"
     tours_dates = "GetTourDates"
+    meals = "GetMeals"
 
 
 class RequestMethods:
@@ -146,6 +147,18 @@ class SletatruClient:
         )
         if data is not None:
             return data["GetHotelsResult"]["Data"]
+        else:
+            return []
+
+    def get_meals(self):
+        """
+        Питание
+
+        """
+        logger.info(f"sletatru_meals")
+        data = self.api_request(path=SletatruPaths.meals, method=RequestMethods.get)
+        if data is not None:
+            return data["GetMealsResult"]["Data"]
         else:
             return []
 

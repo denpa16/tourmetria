@@ -4,3 +4,4 @@ from .resort_loader import ResortLoader
 from .depart_city_loader import DepartCityLoader
 from .hotel_loader import HotelLoader
 from .hotel_category_loader import HotelCategoryLoader
+from .meal_loader import MealLoader
