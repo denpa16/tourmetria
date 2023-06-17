@@ -15,6 +15,9 @@ class CountryViewSet(SpecsFacetsMixin, ReadOnlyModelViewSet):
 
     """
 
+    lookup_field = "ref_id"
+    lookup_url_kwargs = "ref_id"
+
     queryset = Country.objects.all()
     serializer_class = CountrySerializer
     filterset_class = CountryFilter
@@ -26,8 +29,8 @@ class CountryViewSet(SpecsFacetsMixin, ReadOnlyModelViewSet):
         country_specs = {
             "name": "countries",
             "choices": [
-                {"label": name, "value": slug}
-                for name, slug in filter.qs.values_list("name", "slug")
+                {"label": name, "value": ref_id}
+                for name, ref_id in filter.qs.values_list("name", "ref_id")
             ],
         }
         specs = filter.specs()
@@ -38,7 +41,7 @@ class CountryViewSet(SpecsFacetsMixin, ReadOnlyModelViewSet):
     def facets(self, request):
         queryset = self.get_queryset()
         filter = self.filterset_class(request.GET, queryset)
-        country_facets = [country["slug"] for country in filter.qs.values("slug")]
+        country_facets = [country["ref_id"] for country in filter.qs.values("ref_id")]
         facets = filter.facets()
         facets["facets"].append({"name": "countries", "choices": country_facets})
         return Response(facets)

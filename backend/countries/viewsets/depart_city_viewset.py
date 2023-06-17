@@ -15,6 +15,9 @@ class DepartCityViewSet(SpecsFacetsMixin, ReadOnlyModelViewSet):
 
     """
 
+    lookup_field = "ref_id"
+    lookup_url_kwargs = "ref_id"
+
     queryset = DepartCity.objects.all()
     serializer_class = DepartCitySerializer
     filterset_class = DepartCityFilter
@@ -26,8 +29,8 @@ class DepartCityViewSet(SpecsFacetsMixin, ReadOnlyModelViewSet):
         depart_city_specs = {
             "name": "depart_cities",
             "choices": [
-                {"label": name, "value": slug}
-                for name, slug in filter.qs.values_list("name", "slug")
+                {"label": name, "value": ref_id}
+                for name, ref_id in filter.qs.values_list("name", "ref_id")
             ],
         }
         specs = filter.specs()
@@ -38,7 +41,7 @@ class DepartCityViewSet(SpecsFacetsMixin, ReadOnlyModelViewSet):
     def facets(self, request):
         queryset = self.get_queryset()
         filter = self.filterset_class(request.GET, queryset)
-        depart_city_facets = [depart_city["slug"] for depart_city in filter.qs.values("slug")]
+        depart_city_facets = [depart_city["ref_id"] for depart_city in filter.qs.values("ref_id")]
         facets = filter.facets()
         facets["facets"].append({"depart_cities": depart_city_facets})
         return Response(facets)
