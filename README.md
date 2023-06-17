@@ -1,6 +1,6 @@
 # Сервис дешевых туров Tourmetria (aka Aviasales)
 
-[Ссылка](develop.tourmetria.ru)
+[Ссылка на develop сайт](https://develop.tourmetria.ru)
 
 
 ## Общая концепция
