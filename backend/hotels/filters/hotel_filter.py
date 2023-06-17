@@ -31,9 +31,9 @@ class HotelFilter(FacetFilterSet):
     @staticmethod
     def get_country_specs(queryset):
         queryset = (
-            queryset.values_list("resort__country__name", "resort__country__slug")
-            .order_by("resort__country__name", "resort__country__slug")
-            .distinct("resort__country__name", "resort__country__slug")
+            queryset.values_list("resort__country__name", "resort__country__ref_id")
+            .order_by("resort__country__name", "resort__country__ref_id")
+            .distinct("resort__country__name", "resort__country__ref_id")
         )
         specs = [
             {"label": country_name, "value": country_slug}
@@ -44,17 +44,17 @@ class HotelFilter(FacetFilterSet):
     @staticmethod
     def country_aggregate(queryset):
         return (
-            queryset.values_list("resort__country__name", "resort__country__slug", flat=True)
-            .order_by("resort__country__name", "resort__country__slug")
-            .distinct("resort__country__name", "resort__country__slug")
+            queryset.values_list("resort__country__name", "resort__country__ref_id", flat=True)
+            .order_by("resort__country__name", "resort__country__ref_id")
+            .distinct("resort__country__name", "resort__country__ref_id")
         )
 
     @staticmethod
     def get_resort_specs(queryset):
         queryset = (
-            queryset.values_list("resort__name", "resort__slug")
-            .order_by("resort__name", "resort__slug")
-            .distinct("resort__name", "resort__slug")
+            queryset.values_list("resort__name", "resort__ref_id")
+            .order_by("resort__name", "resort__ref_id")
+            .distinct("resort__name", "resort__ref_id")
         )
         specs = [
             {"label": resort_name, "value": resort_slug} for resort_name, resort_slug in queryset
@@ -64,9 +64,9 @@ class HotelFilter(FacetFilterSet):
     @staticmethod
     def resort_aggregate(queryset):
         return (
-            queryset.values_list("resort__name", "resort__slug", flat=True)
-            .order_by("resort__name", "resort__slug")
-            .distinct("resort__name", "resort__slug")
+            queryset.values_list("resort__ref_id", flat=True)
+            .order_by("resort__ref_id")
+            .distinct("resort__ref_id")
         )
 
     @staticmethod
@@ -97,9 +97,9 @@ class HotelFilter(FacetFilterSet):
     @staticmethod
     def get_category_specs(queryset):
         categories = (
-            queryset.order_by("category__name")
-            .distinct("category__name")
-            .values_list("category__name", flat=True)
+            queryset.order_by("category__name", "category__ref_id")
+            .distinct("category__name", "category__ref_id")
+            .values_list("category__name", "category__ref_id")
         )
         category_map = {
             "HV-2": "Клубный отель 4-5 звезд",
@@ -114,14 +114,14 @@ class HotelFilter(FacetFilterSet):
             "1*": "1 звезда",
         }
         return [
-            {"value": category, "label": category_map.get(category, "Без звезд")}
-            for category in categories
+            {"label": category_map.get(category_name, "Без звезд"), "value": category_ref_id}
+            for category_name, category_ref_id in categories
         ]
 
     @staticmethod
     def category_aggregate(queryset):
         return (
-            queryset.values_list("category__name", flat=True)
-            .order_by("category__name")
-            .distinct("category__name")
+            queryset.values_list("category__ref_id", flat=True)
+            .order_by("category__ref_id")
+            .distinct("category__ref_id")
         )

@@ -14,6 +14,9 @@ class HotelViewSet(SpecsFacetsMixin, ReadOnlyModelViewSet):
 
     """
 
+    lookup_field = "ref_id"
+    lookup_url_kwargs = "ref_id"
+
     serializer_class = HotelListSerializer
     filterset_class = HotelFilter
     pagination_class = HotelLimitOffsetPagination
