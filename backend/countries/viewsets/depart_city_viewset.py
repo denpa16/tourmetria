@@ -1,7 +1,9 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from common.viewset_mixins import SpecsFacetsMixin
 from rest_framework.response import Response
+from rest_framework import filters
 from rest_framework.decorators import action
 from countries.filters import DepartCityFilter
 from countries.models import DepartCity
@@ -21,6 +23,13 @@ class DepartCityViewSet(SpecsFacetsMixin, ReadOnlyModelViewSet):
     queryset = DepartCity.objects.all()
     serializer_class = DepartCitySerializer
     filterset_class = DepartCityFilter
+
+    filter_backends = (
+        filters.SearchFilter,
+        filters.OrderingFilter,
+        DjangoFilterBackend,
+    )
+    search_fields = ("^name",)
 
     @action(detail=False, methods=("GET",))
     def specs(self, request):
