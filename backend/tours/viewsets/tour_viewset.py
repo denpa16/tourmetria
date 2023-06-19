@@ -3,11 +3,11 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.viewsets import GenericViewSet
-
 from django.conf import settings
-from sletatru.services import SletatruClient
 
+from sletatru.services import SletatruClient
 from tours.serializers import TourListSerializer
+from tours.utils import get_detail_tour, serialize_detailed_tour
 
 
 @extend_schema(tags=["Tours"])
@@ -33,8 +33,12 @@ class TourViewSet(GenericViewSet):
         return Response(data=data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, *args, **kwargs):
-        retrieve_data = "Tour Detail"
-        return Response(data=retrieve_data, status=status.HTTP_200_OK)
+        params = request.query_params
+        tours = self.client.get_tours(params)
+        pk = kwargs.get("pk")
+        detailed_tour = get_detail_tour(tours, pk)
+        data = serialize_detailed_tour(detailed_tour)
+        return Response(data=data, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=("GET",))
     def get_tours_dates(self, request, *args, **kwargs):
