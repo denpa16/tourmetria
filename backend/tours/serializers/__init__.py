@@ -1,1 +1,1 @@
-from .tour_serializer import TourListSerializer
+from .tour_serializer import TourListSerializer, TourRetrieveSerializer
