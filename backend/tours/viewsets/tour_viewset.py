@@ -6,8 +6,7 @@ from rest_framework.viewsets import GenericViewSet
 from django.conf import settings
 
 from sletatru.services import SletatruClient
-from tours.serializers import TourListSerializer
-from tours.utils import get_detail_tour, serialize_detailed_tour
+from tours.utils import get_detail_tour, serialize_detailed_tour, serialize_list_tour
 
 
 @extend_schema(tags=["Tours"])
@@ -26,10 +25,8 @@ class TourViewSet(GenericViewSet):
 
     def list(self, request, *args, **kwargs):
         params = request.query_params
-        tours = self.client.get_tours(params)
-        serializer = TourListSerializer(data=tours, many=True)
-        serializer.is_valid()
-        data = serializer.data
+        tours_data = self.client.get_tours(params)
+        data = serialize_list_tour(tours_data)
         return Response(data=data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, *args, **kwargs):

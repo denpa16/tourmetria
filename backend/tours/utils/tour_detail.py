@@ -22,7 +22,6 @@ def serialize_detailed_tour(tour: list):
 
     """
     tour = [tour]
-    print(tour)
     serializer = TourRetrieveSerializer(data=tour, many=True)
     serializer.is_valid()
     return serializer.data[0]
