@@ -12,6 +12,8 @@ class HotelDataConverter(BaseConverter):
     """
 
     UPDATE_FIELDS = (
+        "name",
+        "slug",
         "beach_line",
         "is_in_bonus_program",
         "original_name",

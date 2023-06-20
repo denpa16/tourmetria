@@ -175,7 +175,7 @@ class SletatruClient:
         referer = f"https://sletat.ru/search?{formatted_params}"
         headers = {"Referer": referer}
         if params.get("requestId", None) is None:
-            url = f"https://module.sletat.ru/Main.svc/GetTours?{formatted_params}"
+            url = f"https://module.sletat.ru/slt/Main.svc/GetTours?{formatted_params}"
             response = requests.get(
                 url=url,
                 headers=headers,
@@ -185,7 +185,7 @@ class SletatruClient:
                 requestId = data["GetToursResult"]["Data"]["requestId"]
             else:
                 return []
-            url = f"https://module.sletat.ru/Main.svc/GetTours?{formatted_params}&requestId={requestId}"
+            url = f"https://module.sletat.ru/slt/Main.svc/GetTours?{formatted_params}&requestId={requestId}"
             referer = f"https://sletat.ru/search?{formatted_params}&requestId={requestId}"
             headers = {"Referer": referer}
             response = requests.get(
@@ -204,7 +204,7 @@ class SletatruClient:
             else:
                 return []
         else:
-            url = f"https://module.sletat.ru/Main.svc/GetTours?{formatted_params}"
+            url = f"https://module.sletat.ru/slt/Main.svc/GetTours?{formatted_params}"
             response = requests.get(
                 url=url,
                 headers=headers,
