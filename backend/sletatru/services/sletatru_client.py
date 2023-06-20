@@ -171,11 +171,10 @@ class SletatruClient:
         logger.info("sletatru_tours")
 
         string_params = "&".join([f"{key}={value}" for key, value in params.items()])
-        formatted_params = string_params[1:]
-
+        formatted_params = string_params
         referer = f"https://sletat.ru/search?{formatted_params}"
         headers = {"Referer": referer}
-        if params["requestId"] == "0":
+        if params.get("requestId", None) is None:
             url = f"https://module.sletat.ru/Main.svc/GetTours?{formatted_params}"
             response = requests.get(
                 url=url,
