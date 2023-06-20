@@ -14,6 +14,7 @@ class TourListSerializer(Serializer):
     resort_ref_id = SerializerMethodField()
     resort_name = SerializerMethodField()
     hotel_ref_id = SerializerMethodField()
+    hotel_name = SerializerMethodField()
     nights_count = SerializerMethodField()
     price = SerializerMethodField()
     price_currency = SerializerMethodField()
@@ -49,6 +50,10 @@ class TourListSerializer(Serializer):
     @staticmethod
     def get_hotel_ref_id(obj):
         return obj[3]
+
+    @staticmethod
+    def get_hotel_name(obj):
+        return obj[7]
 
     @staticmethod
     def get_nights_count(obj):
@@ -92,6 +97,7 @@ class TourRetrieveSerializer(Serializer):
     resort_ref_id = SerializerMethodField()
     resort_name = SerializerMethodField()
     hotel_ref_id = SerializerMethodField()
+    hotel_name = SerializerMethodField()
     nights_count = SerializerMethodField()
     price = SerializerMethodField()
     price_currency = SerializerMethodField()
@@ -127,6 +133,10 @@ class TourRetrieveSerializer(Serializer):
     @staticmethod
     def get_hotel_ref_id(obj):
         return obj[3]
+
+    @staticmethod
+    def get_hotel_name(obj):
+        return obj[7]
 
     @staticmethod
     def get_nights_count(obj):
