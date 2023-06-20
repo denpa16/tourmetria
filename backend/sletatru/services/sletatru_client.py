@@ -3,6 +3,7 @@ from typing import Any
 import requests
 from requests import Response
 import logging
+import time
 
 logger = logging.getLogger(__name__)
 
@@ -15,6 +16,7 @@ class SletatruPaths:
     hotels_categories = "GetHotelStars"
     tours = "GetTours"
     tours_dates = "GetTourDates"
+    meals = "GetMeals"
 
 
 class RequestMethods:
@@ -149,31 +151,76 @@ class SletatruClient:
         else:
             return []
 
+    def get_meals(self):
+        """
+        Питание
+
+        """
+        logger.info(f"sletatru_meals")
+        data = self.api_request(path=SletatruPaths.meals, method=RequestMethods.get)
+        if data is not None:
+            return data["GetMealsResult"]["Data"]
+        else:
+            return []
+
     def get_tours(self, params):
         """
         Туры
 
         """
         logger.info("sletatru_tours")
-        path = SletatruPaths.tours
-        query_params = "&".join([f"{key}={value}" for key, value in params.items()])
-        url = self.get_url(path)
-        headers = {
-            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
-            "Chrome/51.0.2704.106 Safari/537.36 OPR/38.0.2220.41",
-            "Content-Type": "application/json",
-            "Referer": url + query_params,
-        }
-        data = self.api_request(
-            path=SletatruPaths.tours, method=RequestMethods.get, params=params, headers=headers
-        )
-        if data is not None:
-            try:
-                return data["GetToursResult"]["Data"]["aaData"]
-            except Exception:
+
+        string_params = "&".join([f"{key}={value}" for key, value in params.items()])
+        formatted_params = string_params[1:]
+
+        referer = f"https://sletat.ru/search?{formatted_params}"
+        headers = {"Referer": referer}
+        if params["requestId"] == "0":
+            url = f"https://module.sletat.ru/Main.svc/GetTours?{formatted_params}"
+            response = requests.get(
+                url=url,
+                headers=headers,
+            )
+            if response.status_code == 200:
+                data = response.json()
+                requestId = data["GetToursResult"]["Data"]["requestId"]
+            else:
+                return []
+            url = f"https://module.sletat.ru/Main.svc/GetTours?{formatted_params}&requestId={requestId}"
+            referer = f"https://sletat.ru/search?{formatted_params}&requestId={requestId}"
+            headers = {"Referer": referer}
+            response = requests.get(
+                url=url,
+                headers=headers,
+            )
+            if response.status_code == 200:
+                data = response.json()
+                if data is not None:
+                    try:
+                        return data["GetToursResult"]["Data"]
+                    except Exception:
+                        return []
+                else:
+                    return []
+            else:
                 return []
         else:
-            return []
+            url = f"https://module.sletat.ru/Main.svc/GetTours?{formatted_params}"
+            response = requests.get(
+                url=url,
+                headers=headers,
+            )
+            if response.status_code == 200:
+                data = response.json()
+                if data is not None:
+                    try:
+                        return data["GetToursResult"]["Data"]
+                    except Exception:
+                        return []
+                else:
+                    return []
+            else:
+                return []
 
     def get_tours_dates(self, params):
         """

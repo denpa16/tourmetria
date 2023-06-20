@@ -1,8 +1,4 @@
-from rest_framework.serializers import (
-    Serializer,
-    SerializerMethodField,
-    IntegerField,
-)
+from rest_framework.serializers import Serializer, SerializerMethodField, IntegerField
 
 
 class TourListSerializer(Serializer):
@@ -22,8 +18,8 @@ class TourListSerializer(Serializer):
     price = SerializerMethodField()
     price_currency = SerializerMethodField()
     tour_start_date = SerializerMethodField()
-    tour_depart_date = SerializerMethodField()
-    tour_return_date = SerializerMethodField()
+    tour_depart_start_date = SerializerMethodField()
+    tour_depart_stop_date = SerializerMethodField()
     tickets_included = SerializerMethodField()
 
     @staticmethod
@@ -71,12 +67,12 @@ class TourListSerializer(Serializer):
         return obj[28]
 
     @staticmethod
-    def get_tour_depart_date(obj):
+    def get_tour_depart_start_date(obj):
         return obj[12]
 
     @staticmethod
-    def get_tour_return_date(obj):
-        return obj[12]
+    def get_tour_depart_stop_date(obj):
+        return obj[13]
 
     @staticmethod
     def get_tickets_included(obj):
@@ -100,8 +96,8 @@ class TourRetrieveSerializer(Serializer):
     price = SerializerMethodField()
     price_currency = SerializerMethodField()
     tour_start_date = SerializerMethodField()
-    tour_depart_date = SerializerMethodField()
-    tour_return_date = SerializerMethodField()
+    tour_depart_start_date = SerializerMethodField()
+    tour_depart_stop_date = SerializerMethodField()
     tickets_included = SerializerMethodField()
 
     @staticmethod
@@ -149,12 +145,12 @@ class TourRetrieveSerializer(Serializer):
         return obj[28]
 
     @staticmethod
-    def get_tour_depart_date(obj):
+    def get_tour_depart_start_date(obj):
         return obj[12]
 
     @staticmethod
-    def get_tour_return_date(obj):
-        return obj[12]
+    def get_tour_depart_stop_date(obj):
+        return obj[13]
 
     @staticmethod
     def get_tickets_included(obj):
