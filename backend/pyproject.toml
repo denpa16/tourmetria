@@ -18,6 +18,9 @@ django-redis-cache = "3.0.*"
 django-storages = "1.12.*"
 gunicorn = "^20.1.0"
 django-user-agents = "^0.4.0"
+django-hashedfilenamestorage = {git = "https://github.com/ecometrica/django-hashedfilenamestorage.git", rev = "45b7ef1e68b0e89c2fd6a20d2d1db57f620a5f8f"}
+python-telegram-bot = "^20.3"
+pyTelegramBotAPI = "^4.12.0"
 
 # Models \ Admin
 django-solo = "2.0.*"

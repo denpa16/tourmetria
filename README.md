@@ -1,2 +1,21 @@
-# tourmetria
-Tourmetria Site
+# Сервис дешевых туров Tourmetria (aka Aviasales)
+
+[Ссылка на develop сайт](https://develop.tourmetria.ru)
+
+
+## Общая концепция
+
+Сервис для поиска и бронирования туров по всем миру
+
+Информация по турам приходит от сервиса [Слетать.ру](https://sletat.ru/)
+
+
+## API и данные
+[Документация API ](docs/api.md)
+
+
+## Релизы
+
+Первый релиз: release_0.0.1
+- поиск туров
+

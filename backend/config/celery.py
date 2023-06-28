@@ -18,7 +18,6 @@ app.conf.beat_schedule = {
         "schedule": crontab(minute="*/1"),
         "options": {"queue": "bg"},
     },
-
 }
 
 if __name__ == "__main__":

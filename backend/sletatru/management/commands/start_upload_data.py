@@ -13,4 +13,4 @@ class Command(BaseCommand):
     """
 
     def handle(self, *args, **kwargs):
-        daily_uploading_data_from_crm()
+        daily_uploading_data_from_crm.delay()

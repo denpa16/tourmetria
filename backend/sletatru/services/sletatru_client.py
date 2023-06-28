@@ -3,13 +3,20 @@ from typing import Any
 import requests
 from requests import Response
 import logging
+import time
 
 logger = logging.getLogger(__name__)
 
 
 class SletatruPaths:
     countries = "GetCountries"
-    cities = "GetCities"
+    resorts = "GetCities"
+    depart_cities = "GetDepartCities"
+    hotels = "GetHotels"
+    hotels_categories = "GetHotelStars"
+    tours = "GetTours"
+    tours_dates = "GetTourDates"
+    meals = "GetMeals"
 
 
 class RequestMethods:
@@ -70,6 +77,10 @@ class SletatruClient:
         return "{}/{}".format(self.base_url, path)
 
     def get_countries(self):
+        """
+        Страны
+
+        """
         logger.info("sletatru_countries")
         data = self.api_request(path=SletatruPaths.countries, method=RequestMethods.get)
         if data is not None:
@@ -78,13 +89,152 @@ class SletatruClient:
             return []
 
     def get_country_resorts(self, country_ref_id):
-        logger.info(f"sletatru_cities: country {country_ref_id}")
+        """
+        Курорты стран
+
+        """
+        logger.info(f"sletatru_resorts: country {country_ref_id}")
         data = self.api_request(
-            path=SletatruPaths.cities,
+            path=SletatruPaths.resorts,
             method=RequestMethods.get,
             params={"countryId": country_ref_id},
         )
         if data is not None:
             return data["GetCitiesResult"]["Data"]
+        else:
+            return []
+
+    def get_country_depart_cities(self):
+        """
+        Города вылета стран
+
+        """
+        logger.info(f"sletatru_depart_cities")
+        data = self.api_request(
+            path=SletatruPaths.depart_cities,
+            method=RequestMethods.get,
+        )
+        if data is not None:
+            return data["GetDepartCitiesResult"]["Data"]
+        else:
+            return []
+
+    def get_hotels_categories(self, country_ref_id):
+        """
+        Категории отелей
+
+        """
+        logger.info(f"sletatru_hotels_categories")
+        data = self.api_request(
+            path=SletatruPaths.hotels_categories,
+            method=RequestMethods.get,
+            params={"countryId": country_ref_id},
+        )
+        if data is not None:
+            return data["GetHotelStarsResult"]["Data"]
+        else:
+            return []
+
+    def get_resort_hotels(self, resort_ref_id):
+        """
+        Отели курорта
+
+        """
+        logger.info(f"sletatru_hotels")
+        data = self.api_request(
+            path=SletatruPaths.hotels,
+            method=RequestMethods.get,
+            params={"towns": resort_ref_id},
+        )
+        if data is not None:
+            return data["GetHotelsResult"]["Data"]
+        else:
+            return []
+
+    def get_meals(self):
+        """
+        Питание
+
+        """
+        logger.info(f"sletatru_meals")
+        data = self.api_request(path=SletatruPaths.meals, method=RequestMethods.get)
+        if data is not None:
+            return data["GetMealsResult"]["Data"]
+        else:
+            return []
+
+    def get_tours(self, params):
+        """
+        Туры
+
+        """
+        logger.info("sletatru_tours")
+
+        string_params = "&".join([f"{key}={value}" for key, value in params.items()])
+        formatted_params = string_params
+        referer = f"https://sletat.ru/search?{formatted_params}"
+        headers = {"Referer": referer}
+        if params.get("requestId", None) is None:
+            url = f"https://module.sletat.ru/slt/Main.svc/GetTours?{formatted_params}"
+            response = requests.get(
+                url=url,
+                headers=headers,
+            )
+            if response.status_code == 200:
+                data = response.json()
+                requestId = data["GetToursResult"]["Data"]["requestId"]
+            else:
+                return []
+            time.sleep(1)
+            url = f"https://module.sletat.ru/slt/Main.svc/GetTours?{formatted_params}&requestId={requestId}"
+            referer = f"https://sletat.ru/search?{formatted_params}&requestId={requestId}"
+            headers = {"Referer": referer}
+            response = requests.get(
+                url=url,
+                headers=headers,
+            )
+            if response.status_code == 200:
+                data = response.json()
+                if data is not None:
+                    try:
+                        return data["GetToursResult"]["Data"]
+                    except Exception:
+                        return []
+                else:
+                    return []
+            else:
+                return []
+        else:
+            url = f"https://module.sletat.ru/slt/Main.svc/GetTours?{formatted_params}"
+            response = requests.get(
+                url=url,
+                headers=headers,
+            )
+            if response.status_code == 200:
+                data = response.json()
+                if data is not None:
+                    try:
+                        return data["GetToursResult"]["Data"]
+                    except Exception:
+                        return []
+                else:
+                    return []
+            else:
+                return []
+
+    def get_tours_dates(self, params):
+        """
+        Доступные даты туров
+
+        """
+        logger.info("sletatru_tours_dates")
+        data = self.api_request(
+            path=SletatruPaths.tours_dates, method=RequestMethods.get, params=params
+        )
+        if data is not None:
+            try:
+                return data["GetTourDatesResult"]["Data"]["dates"]
+            except Exception:
+                return []
         else:
             return []
