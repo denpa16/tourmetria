@@ -31,6 +31,7 @@ x-app_environment: &app_environment
     - SLETATRU_URL
     - SLETATRU_LOGIN
     - SLETATRU_PASSWORD
+    - TG_BOT_TOKEN
 
 services:
   nginx:
@@ -54,6 +55,15 @@ services:
     build:
       context: ./backend
     <<: *app_environment
+    depends_on:
+      - db
+
+  tg:
+    build:
+      context: ./backend
+    <<: *app_environment
+    command: >
+      sh -c "python ./manage.py start_bot"
     depends_on:
       - db
 

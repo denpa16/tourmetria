@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "sletatru.apps.SletatruConfig",
     "hotels.apps.HotelsConfig",
     "tours.apps.ToursConfig",
+    "tg.apps.TgConfig",
 ]
 
 MIDDLEWARE = [
@@ -344,3 +345,6 @@ AWS_S3_FILE_OVERWRITE = False
 SLETATRU_URL = getenv("SLETATRU_URL")
 SLETATRU_LOGIN = getenv("SLETATRU_LOGIN")
 SLETATRU_PASSWORD = getenv("SLETATRU_PASSWORD")
+
+# TELEGRAM_BOT
+TG_BOT_TOKEN = getenv("TG_BOT_TOKEN")
