@@ -185,6 +185,7 @@ class SletatruClient:
                 requestId = data["GetToursResult"]["Data"]["requestId"]
             else:
                 return []
+            time.sleep(1)
             url = f"https://module.sletat.ru/slt/Main.svc/GetTours?{formatted_params}&requestId={requestId}"
             referer = f"https://sletat.ru/search?{formatted_params}&requestId={requestId}"
             headers = {"Referer": referer}
