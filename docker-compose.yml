@@ -61,11 +61,11 @@ services:
   tg:
     build:
       context: ./backend
-    <<: *app_environment
     command: >
       sh -c "python ./manage.py start_bot"
     depends_on:
       - backend
+    <<: *app_environment
 
   db:
     image: postgres:15.3-alpine
