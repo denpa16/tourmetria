@@ -61,6 +61,8 @@ services:
   telegram:
     build:
       context: ./backend
+    command: >
+      sh -c "python ./manage.py start_bot"
     depends_on:
       - backend
     <<: *app_environment
