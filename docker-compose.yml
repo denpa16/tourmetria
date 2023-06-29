@@ -58,7 +58,7 @@ services:
     depends_on:
       - db
 
-  telegram:
+  tg:
     build:
       context: ./backend
     command: >
