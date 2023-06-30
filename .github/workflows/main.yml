@@ -21,6 +21,7 @@ env:
   SLETATRU_LOGIN: ${{ vars.SLETATRU_LOGIN }}
   SLETATRU_PASSWORD: ${{ vars.SLETATRU_PASSWORD }}
   TG_BOT_TOKEN: ${{ vars.TG_BOT_TOKEN }}
+  TG_BOT_START: ${{ vars.TG_BOT_START }}
 
 jobs:
   #build:

@@ -17,6 +17,7 @@ class SletatruPaths:
     tours = "GetTours"
     tours_dates = "GetTourDates"
     meals = "GetMeals"
+    hotel_detail = "GetHotelInfo"
 
 
 class RequestMethods:
@@ -148,6 +149,29 @@ class SletatruClient:
         )
         if data is not None:
             return data["GetHotelsResult"]["Data"]
+        else:
+            return []
+
+    def get_hotel_detail(self, ref_id):
+        """
+        Детальная информация о курорте
+
+        """
+        logger.info(f"sletatru_hotel_detail")
+        headers = {
+            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/51.0.2704.106 Safari/537.36 OPR/38.0.2220.41",
+            "Content-Type": "application/json",
+            "Referer": "https://sletat.ru/",
+        }
+        data = self.api_request(
+            path=SletatruPaths.hotel_detail,
+            method=RequestMethods.get,
+            params={"hotelId": ref_id},
+            headers=headers,
+        )
+        if data is not None:
+            return data["GetHotelInfoResult"]["Data"]
         else:
             return []
 

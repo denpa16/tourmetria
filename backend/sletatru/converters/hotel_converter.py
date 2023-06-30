@@ -114,3 +114,41 @@ class HotelDataConverter(BaseConverter):
         except Resort.DoesNotExist:
             resort = None
         return resort
+
+
+class HotelDetailDataConverter(BaseConverter):
+    """
+    Конвертер данных для создания заполнения детальной информации об отеле
+    """
+
+    UPDATE_FIELDS = (
+        "update_date",
+        "latitude",
+        "longitude",
+    )
+
+    def cleanup_create_data(self):
+        """
+        Очистка данных для создания объекта
+        """
+
+        clean_data = {
+            "latitude": self.data["Latitude"],
+            "longitude": self.data["Longitude"],
+            "update_date": timezone.now(),
+        }
+
+        return clean_data
+
+    def cleanup_update_data(self):
+        """
+        Очистка данных для обновления объекта
+        """
+
+        clean_data = {
+            "latitude": self.data["Latitude"],
+            "longitude": self.data["Longitude"],
+            "update_date": timezone.now(),
+        }
+
+        return clean_data
