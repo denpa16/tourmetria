@@ -125,6 +125,11 @@ class HotelDetailDataConverter(BaseConverter):
         "update_date",
         "latitude",
         "longitude",
+        "description",
+        "distance_to_airport",
+        "phone",
+        "email",
+        "room_count",
     )
 
     def cleanup_create_data(self):
@@ -135,6 +140,11 @@ class HotelDetailDataConverter(BaseConverter):
         clean_data = {
             "latitude": self.data["Latitude"],
             "longitude": self.data["Longitude"],
+            "description": self.data["Description"],
+            "distance_to_airport": self.data["HotelAirportDistance"],
+            "phone": self.data["HotelPhone"],
+            "email": self.data["HotelEmail"],
+            "room_count": self.data["HotelRoomsCount"],
             "update_date": timezone.now(),
         }
 
@@ -148,6 +158,11 @@ class HotelDetailDataConverter(BaseConverter):
         clean_data = {
             "latitude": self.data["Latitude"],
             "longitude": self.data["Longitude"],
+            "description": self.data["Description"],
+            "distance_to_airport": self.data["HotelAirportDistance"],
+            "phone": self.data["HotelPhone"],
+            "email": self.data["HotelEmail"],
+            "room_count": self.data["HotelRoomsCount"],
             "update_date": timezone.now(),
         }
 

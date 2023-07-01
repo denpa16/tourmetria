@@ -8,6 +8,7 @@ class Hotel(models.Model):
     Отель
 
     """
+
     active = models.BooleanField(
         verbose_name="Активный",
         default=False,
@@ -51,7 +52,7 @@ class Hotel(models.Model):
         verbose_name="Бонусная программа Слетать.ру",
         default=False,
         help_text="Если отель предлагает турагентам бонусы за туристов, "
-                  "то ставится галочка; в противном случае – нет",
+        "то ставится галочка; в противном случае – нет",
     )
     original_name = models.CharField(
         verbose_name="Название отеля на латинице",
@@ -72,41 +73,25 @@ class Hotel(models.Model):
         verbose_name="Количество поисков по отелю за период (1 месяц)", blank=True, null=True
     )
     rate = models.FloatField(verbose_name="Ранг отеля", blank=True, null=True)
-    latitude = models.DecimalField(
+    latitude = models.FloatField(
         verbose_name="Широта на карте",
-        decimal_places=6,
-        max_digits=9,
         null=True,
         blank=True,
     )
-    longitude = models.DecimalField(
+    longitude = models.FloatField(
         verbose_name="Долгота на карте",
-        decimal_places=6,
-        max_digits=9,
         null=True,
         blank=True,
     )
-    distance_to_airport = models.DecimalField(
+    distance_to_airport = models.FloatField(
         verbose_name="Расстояние до аэропорта",
-        decimal_places=2,
-        max_digits=4,
         null=True,
         blank=True,
     )
-    phone = PhoneNumberField(
-        verbose_name="Телефон",
-        blank=True,
-        null=True
-    )
-    email = models.EmailField(
-        verbose_name="Email",
-        blank=True,
-        null=True
-    )
+    phone = PhoneNumberField(verbose_name="Телефон", blank=True, null=True)
+    email = models.EmailField(verbose_name="Email", blank=True, null=True)
     room_count = models.PositiveIntegerField(
-        verbose_name="Количество номеров",
-        blank=True,
-        null=True
+        verbose_name="Количество номеров", blank=True, null=True
     )
     description = RichTextField(
         verbose_name="Описание",

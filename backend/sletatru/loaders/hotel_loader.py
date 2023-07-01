@@ -74,4 +74,4 @@ class HotelDetailLoader(BaseLoader):
                 hotel_data = self.client.get_hotel_detail(ref_id=ref_id)
                 hotels_to_update[ref_id] = dict(**self.converter(hotel_data, action="update"))
                 print(dict(**self.converter(hotel_data, action="update")))
-            # self.bulk_update(hotels_to_update)
+            self.bulk_update(hotels_to_update)
