@@ -29,6 +29,7 @@ class HotelAdmin(admin.ModelAdmin):
         "name",
         "resort__name",
     )
+    filter_horizontal = ("rest_types",)
 
     def get_queryset(self, request):
         return (
