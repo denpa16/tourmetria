@@ -6,7 +6,10 @@ class Country(models.Model):
     Страна
 
     """
-
+    active = models.BooleanField(
+        verbose_name="Активный",
+        default=False,
+    )
     ref_id = models.CharField(
         verbose_name="Внешний ID",
         max_length=255,
