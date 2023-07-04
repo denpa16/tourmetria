@@ -20,6 +20,7 @@ from sletatru.loaders import (
     HotelCategoryLoader,
     HotelLoader,
     HotelDetailLoader,
+    HotelRelatedDataLoader,
 )
 
 from countries.models import Country, Resort, DepartCity
@@ -49,6 +50,7 @@ def daily_uploading_data_from_crm() -> str:
         # ),
         # HotelLoader(model=Hotel, converter=HotelDataConverter, client=client),
         HotelDetailLoader(model=Hotel, converter=HotelDetailDataConverter, client=client),
+        HotelRelatedDataLoader(model=Hotel, converter=None, client=client),
     ]
 
     updated = 0

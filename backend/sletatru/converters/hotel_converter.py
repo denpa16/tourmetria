@@ -138,13 +138,13 @@ class HotelDetailDataConverter(BaseConverter):
         """
 
         clean_data = {
-            "latitude": self.data["Latitude"],
-            "longitude": self.data["Longitude"],
-            "description": self.data["Description"],
-            "distance_to_airport": self.data["HotelAirportDistance"],
-            "phone": self.data["HotelPhone"],
-            "email": self.data["HotelEmail"],
-            "room_count": self.data["HotelRoomsCount"],
+            "latitude": self.data.get("Latitude"),
+            "longitude": self.data.get("Longitude"),
+            "description": self.data.get("Description"),
+            "distance_to_airport": self.data.get("HotelAirportDistance"),
+            "phone": self.data.get("HotelPhone"),
+            "email": self.data.get("HotelEmail"),
+            "room_count": self.data.get("HotelRoomsCount"),
             "update_date": timezone.now(),
         }
 
@@ -156,13 +156,13 @@ class HotelDetailDataConverter(BaseConverter):
         """
 
         clean_data = {
-            "latitude": self.data["Latitude"],
-            "longitude": self.data["Longitude"],
-            "description": self.data["Description"],
-            "distance_to_airport": self.data["HotelAirportDistance"],
-            "phone": self.data["HotelPhone"],
-            "email": self.data["HotelEmail"],
-            "room_count": self.data["HotelRoomsCount"],
+            "latitude": self.data.get("Latitude"),
+            "longitude": self.data.get("Longitude"),
+            "description": self.data.get("Description"),
+            "distance_to_airport": self.data.get("HotelAirportDistance"),
+            "phone": self.data.get("HotelPhone"),
+            "email": self.data.get("HotelEmail"),
+            "room_count": self.data.get("HotelRoomsCount"),
             "update_date": timezone.now(),
         }
 
