@@ -13,6 +13,7 @@ class HotelAdmin(admin.ModelAdmin):
 
     list_display = (
         "__str__",
+        "active",
         "id",
         "resort",
         "category",
