@@ -25,6 +25,7 @@ class DepartCityAdmin(admin.ModelAdmin):
         "name",
         "country__name",
     )
+    list_editable = ("active",)
 
     def get_queryset(self, request):
         return (
