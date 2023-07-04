@@ -12,6 +12,7 @@ class DepartCityAdmin(admin.ModelAdmin):
 
     list_display = (
         "__str__",
+        "active",
         "id",
         "country",
         "is_popular",

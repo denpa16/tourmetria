@@ -12,6 +12,7 @@ class ResortAdmin(admin.ModelAdmin):
 
     list_display = (
         "__str__",
+        "active",
         "id",
         "country",
         "is_popular",
