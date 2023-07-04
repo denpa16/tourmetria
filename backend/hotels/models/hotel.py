@@ -100,7 +100,7 @@ class Hotel(models.Model):
     )
     rest_types = models.ManyToManyField(
         "hotels.HotelRestType",
-        verbose_name="Тип отеля",
+        verbose_name="Тип отдыха в отеле",
     )
     update_date = models.DateTimeField(verbose_name="Последнее обновление", null=True, blank=True)
 

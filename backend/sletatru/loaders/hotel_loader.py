@@ -1,8 +1,10 @@
+from slugify import slugify
+
 from sletatru.loaders import BaseLoader
 from sletatru.converters import HotelDataConverter, HotelDetailDataConverter
 from sletatru.utils import func_chunks_generators
 from countries.models import Resort
-from hotels.models import Hotel
+from hotels.models import Hotel, HotelRestType
 
 
 class HotelLoader(BaseLoader):
@@ -65,13 +67,12 @@ class HotelDetailLoader(BaseLoader):
         """
         Создание/обновление детальной информации отелей
         """
-        all_hotels_ref_ids = list(Hotel.objects.values_list("ref_id", flat=True))
+        all_hotels_ref_ids = list(Hotel.objects.order_by("-rate").values_list("ref_id", flat=True))
         hotel_count_in_pack = 100
         hotels_ref_ids_packs = func_chunks_generators(all_hotels_ref_ids[:10], hotel_count_in_pack)
         for hotels_ref_ids_pack in hotels_ref_ids_packs:
-            hotels_to_update = {}
+            hotels_to_update = dict()
             for ref_id in hotels_ref_ids_pack:
                 hotel_data = self.client.get_hotel_detail(ref_id=ref_id)
                 hotels_to_update[ref_id] = dict(**self.converter(hotel_data, action="update"))
-                print(dict(**self.converter(hotel_data, action="update")))
             self.bulk_update(hotels_to_update)

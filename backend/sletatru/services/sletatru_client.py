@@ -171,7 +171,6 @@ class SletatruClient:
             headers=headers,
         )
         if data is not None:
-            print(data["GetHotelInfoResult"]["Data"])
             return data["GetHotelInfoResult"]["Data"]
         else:
             return []
