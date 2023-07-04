@@ -67,7 +67,7 @@ class HotelDetailLoader(BaseLoader):
         """
         Создание/обновление детальной информации отелей
         """
-        all_hotels_ref_ids = list(Hotel.objects.order_by("-rate").values_list("ref_id", flat=True))
+        all_hotels_ref_ids = list(Hotel.objects.active().order_by("-rate").values_list("ref_id", flat=True))
         hotel_count_in_pack = 100
         hotels_ref_ids_packs = func_chunks_generators(all_hotels_ref_ids, hotel_count_in_pack)
         for hotels_ref_ids_pack in hotels_ref_ids_packs:
@@ -88,7 +88,7 @@ class HotelRelatedDataLoader(BaseLoader):
         """
         Создание/обновление типа
         """
-        all_hotels_ref_ids = list(Hotel.objects.order_by("-rate").values_list("ref_id", flat=True))
+        all_hotels_ref_ids = list(Hotel.objects.active().order_by("-rate").values_list("ref_id", flat=True))
         hotel_count_in_pack = 100
         hotels_ref_ids_packs = func_chunks_generators(all_hotels_ref_ids[:10], hotel_count_in_pack)
         for hotels_ref_ids_pack in hotels_ref_ids_packs:
