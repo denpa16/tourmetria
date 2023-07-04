@@ -30,3 +30,4 @@ class CountryAdmin(admin.ModelAdmin):
         "tickets_included",
     )
     search_fields = ("name",)
+    list_editable = ("active",)
