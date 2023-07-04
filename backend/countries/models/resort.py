@@ -7,6 +7,10 @@ class Resort(models.Model):
 
     """
 
+    active = models.BooleanField(
+        verbose_name="Активный",
+        default=False,
+    )
     country = models.ForeignKey(
         "countries.Country",
         verbose_name="Страна",
