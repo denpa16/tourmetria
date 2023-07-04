@@ -12,6 +12,7 @@ class CountryAdmin(admin.ModelAdmin):
 
     list_display = (
         "__str__",
+        "active",
         "id",
         "has_tickets",
         "hotel_is_not_in_stop",
