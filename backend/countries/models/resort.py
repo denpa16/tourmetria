@@ -1,11 +1,15 @@
 from django.db import models
 
+from countries.querysets import ResortQuerySet
+
 
 class Resort(models.Model):
     """
     Курорт
 
     """
+
+    objects = ResortQuerySet.as_manager()
 
     active = models.BooleanField(
         verbose_name="Активный",

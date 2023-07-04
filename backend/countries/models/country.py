@@ -1,11 +1,16 @@
 from django.db import models
 
+from countries.querysets import CountryQuerySet
+
 
 class Country(models.Model):
     """
     Страна
 
     """
+
+    objects = CountryQuerySet.as_manager()
+
     active = models.BooleanField(
         verbose_name="Активный",
         default=False,

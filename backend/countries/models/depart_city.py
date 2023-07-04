@@ -1,11 +1,15 @@
 from django.db import models
 
+from countries.querysets import DepartCityQuerySet
+
 
 class DepartCity(models.Model):
     """
     Город вылета
 
     """
+
+    objects = DepartCityQuerySet.as_manager()
 
     active = models.BooleanField(
         verbose_name="Активный",
