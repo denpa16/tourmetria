@@ -30,6 +30,7 @@ class HotelAdmin(admin.ModelAdmin):
         "resort__name",
     )
     filter_horizontal = ("rest_types",)
+    list_editable = ("active",)
 
     def get_queryset(self, request):
         return (
