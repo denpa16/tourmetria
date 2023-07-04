@@ -69,7 +69,7 @@ class HotelDetailLoader(BaseLoader):
         """
         all_hotels_ref_ids = list(Hotel.objects.order_by("-rate").values_list("ref_id", flat=True))
         hotel_count_in_pack = 100
-        hotels_ref_ids_packs = func_chunks_generators(all_hotels_ref_ids[:10], hotel_count_in_pack)
+        hotels_ref_ids_packs = func_chunks_generators(all_hotels_ref_ids, hotel_count_in_pack)
         for hotels_ref_ids_pack in hotels_ref_ids_packs:
             hotels_to_update = dict()
             for ref_id in hotels_ref_ids_pack:
