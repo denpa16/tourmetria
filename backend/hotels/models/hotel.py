@@ -2,12 +2,16 @@ from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from ckeditor.fields import RichTextField
 
+from hotels.querysets import HotelQuerySet
+
 
 class Hotel(models.Model):
     """
     Отель
 
     """
+
+    objects = HotelQuerySet.as_manager()
 
     active = models.BooleanField(
         verbose_name="Активный",
