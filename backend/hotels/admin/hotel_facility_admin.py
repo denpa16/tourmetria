@@ -12,11 +12,11 @@ class HotelFacilityAdminInline(admin.StackedInline):
     extra = 0
 
 
-@admin.register(HotelFacility)
-class HotelFacilityAdmin(admin.ModelAdmin):
-    """
-    Удобство в отеле
-
-    """
-
-    list_display = ("__str__",)
+#@admin.register(HotelFacility)
+#class HotelFacilityAdmin(admin.ModelAdmin):
+#    """
+#    Удобство в отеле
+#
+#    """
+#
+#    list_display = ("__str__",)
