@@ -29,12 +29,15 @@ def group_tour_into_hotel(sorted_data: list):
     hotels = list()
     for hotel in sorted_data:
         tours = [v for v in sorted_data if v["hotel_name"] == hotel["hotel_name"]]
+        touroperators = set([t["touroperator"] for t in tours])
         tour_min_price = min([obj["price"] for obj in tours])
         hotels.append(
             {
                 "hotel_name": hotel["hotel_name"],
                 "hotel_ref_id": hotel["hotel_ref_id"],
                 "tour_min_price": tour_min_price,
+                "tours_count": len(tours),
+                "touroperator_count": len(touroperators),
                 "tours": tours,
             }
         )
