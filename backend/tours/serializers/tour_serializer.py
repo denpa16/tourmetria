@@ -18,10 +18,13 @@ class TourListSerializer(Serializer):
     nights_count = SerializerMethodField()
     price = SerializerMethodField()
     price_currency = SerializerMethodField()
-    tour_start_date = SerializerMethodField()
-    tour_depart_start_date = SerializerMethodField()
-    tour_depart_stop_date = SerializerMethodField()
+    depart_date = SerializerMethodField()
+    arrive_date = SerializerMethodField()
     tickets_included = SerializerMethodField()
+    meal_type = SerializerMethodField()
+    living_type = SerializerMethodField()
+    room_type = SerializerMethodField()
+    touroperator = SerializerMethodField()
 
     @staticmethod
     def get_tour_ref_id(obj):
@@ -68,20 +71,32 @@ class TourListSerializer(Serializer):
         return obj[43]
 
     @staticmethod
-    def get_tour_start_date(obj):
-        return obj[28]
-
-    @staticmethod
-    def get_tour_depart_start_date(obj):
+    def get_depart_date(obj):
         return obj[12]
 
     @staticmethod
-    def get_tour_depart_stop_date(obj):
+    def get_arrive_date(obj):
         return obj[13]
 
     @staticmethod
     def get_tickets_included(obj):
         return bool(obj[22])
+
+    @staticmethod
+    def get_meal_type(obj):
+        return obj[10]
+
+    @staticmethod
+    def get_living_type(obj):
+        return obj[11]
+
+    @staticmethod
+    def get_room_type(obj):
+        return obj[9]
+
+    @staticmethod
+    def get_touroperator(obj):
+        return obj[18]
 
 
 class TourRetrieveSerializer(Serializer):
@@ -101,10 +116,13 @@ class TourRetrieveSerializer(Serializer):
     nights_count = SerializerMethodField()
     price = SerializerMethodField()
     price_currency = SerializerMethodField()
-    tour_start_date = SerializerMethodField()
-    tour_depart_start_date = SerializerMethodField()
-    tour_depart_stop_date = SerializerMethodField()
+    depart_date = SerializerMethodField()
+    arrive_date = SerializerMethodField()
+    tour_stop_date = SerializerMethodField()
     tickets_included = SerializerMethodField()
+    meal_type = SerializerMethodField()
+    living_type = SerializerMethodField()
+    room_type = SerializerMethodField()
 
     @staticmethod
     def get_tour_ref_id(obj):
@@ -151,17 +169,25 @@ class TourRetrieveSerializer(Serializer):
         return obj[43]
 
     @staticmethod
-    def get_tour_start_date(obj):
-        return obj[28]
-
-    @staticmethod
-    def get_tour_depart_start_date(obj):
+    def get_depart_date(obj):
         return obj[12]
 
     @staticmethod
-    def get_tour_depart_stop_date(obj):
+    def get_arrive_date(obj):
         return obj[13]
 
     @staticmethod
     def get_tickets_included(obj):
         return bool(obj[22])
+
+    @staticmethod
+    def get_meal_type(obj):
+        return obj[10]
+
+    @staticmethod
+    def get_living_type(obj):
+        return obj[11]
+
+    @staticmethod
+    def get_room_type(obj):
+        return obj[9]

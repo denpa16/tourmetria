@@ -12,8 +12,8 @@ class HotelFacilityAdminInline(admin.StackedInline):
     extra = 0
 
 
-#@admin.register(HotelFacility)
-#class HotelFacilityAdmin(admin.ModelAdmin):
+# @admin.register(HotelFacility)
+# class HotelFacilityAdmin(admin.ModelAdmin):
 #    """
 #    Удобство в отеле
 #
