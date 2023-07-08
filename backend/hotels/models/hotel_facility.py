@@ -18,7 +18,7 @@ class HotelFacility(models.Model):
         on_delete=models.CASCADE,
     )
     short_description = models.CharField(
-        verbose_name="Короткое описание",
+        verbose_name="Примечание",
         blank=True,
         null=True,
         max_length=255,
@@ -26,7 +26,7 @@ class HotelFacility(models.Model):
 
     class Meta:
         verbose_name = "Удобство в отеле"
-        verbose_name_plural = "Удобства в отеле"
+        verbose_name_plural = "Удобства в отелях"
 
     def __str__(self):
         return f"{self.id}# Удобство в отеле"

@@ -9,6 +9,12 @@ class FacilityCategory(models.Model):
 
     """
 
+    ref_id = models.CharField(
+        verbose_name="Внешний ID",
+        max_length=255,
+        blank=True,
+        null=True,
+    )
     name = models.CharField(
         verbose_name="Название",
         max_length=255,
@@ -29,11 +35,11 @@ class FacilityCategory(models.Model):
         blank=True,
     )
     icon_content = models.TextField(verbose_name="Контент иконки", null=True, blank=True)
-    color = RGBColorField(verbose_name="Цвет иконки", max_length=8, default="#000000")
+    color = RGBColorField(verbose_name="Цвет иконки", max_length=8, default="#007BA7")
 
     class Meta:
         verbose_name = "Категория удобства"
-        verbose_name_plural = "Категории удобства"
+        verbose_name_plural = "Категории удобств"
 
     def __str__(self):
         return f"{self.name}"
@@ -78,7 +84,7 @@ class Facility(models.Model):
         blank=True,
     )
     icon_content = models.TextField(verbose_name="Контент иконки", null=True, blank=True)
-    color = RGBColorField(verbose_name="Цвет иконки", max_length=8, default="#000000")
+    color = RGBColorField(verbose_name="Цвет иконки", max_length=8, default="#007BA7")
 
     class Meta:
         verbose_name = "Удобство"

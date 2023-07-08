@@ -4,7 +4,7 @@ from sletatru.loaders import BaseLoader
 from sletatru.converters import HotelDataConverter, HotelDetailDataConverter
 from sletatru.utils import func_chunks_generators
 from countries.models import Resort
-from hotels.models import Hotel, HotelRestType
+from hotels.models import Hotel, HotelRestType, Facility, FacilityCategory, HotelFacility
 
 
 class HotelLoader(BaseLoader):
@@ -67,7 +67,9 @@ class HotelDetailLoader(BaseLoader):
         """
         Создание/обновление детальной информации отелей
         """
-        all_hotels_ref_ids = list(Hotel.objects.active().order_by("-rate").values_list("ref_id", flat=True))
+        all_hotels_ref_ids = list(
+            Hotel.objects.active().order_by("-rate").values_list("ref_id", flat=True)
+        )
         hotel_count_in_pack = 100
         hotels_ref_ids_packs = func_chunks_generators(all_hotels_ref_ids, hotel_count_in_pack)
         for hotels_ref_ids_pack in hotels_ref_ids_packs:
@@ -88,9 +90,11 @@ class HotelRelatedDataLoader(BaseLoader):
         """
         Создание/обновление типа
         """
-        all_hotels_ref_ids = list(Hotel.objects.active().order_by("-rate").values_list("ref_id", flat=True))
+        all_hotels_ref_ids = list(
+            Hotel.objects.active().order_by("-rate").values_list("ref_id", flat=True)
+        )
         hotel_count_in_pack = 100
-        hotels_ref_ids_packs = func_chunks_generators(all_hotels_ref_ids[:10], hotel_count_in_pack)
+        hotels_ref_ids_packs = func_chunks_generators(all_hotels_ref_ids, hotel_count_in_pack)
         for hotels_ref_ids_pack in hotels_ref_ids_packs:
             hotels_info = dict()
             for ref_id in hotels_ref_ids_pack:
@@ -101,10 +105,34 @@ class HotelRelatedDataLoader(BaseLoader):
                         ref_id=i["Id"], name=i["Name"], slug=slugify(i["Name"])
                     )
                     rests_info.append(rest_type)
-                hotels_info[ref_id] = rests_info
+                hotel_facilities = list()
+                for k in hotel_data["HotelFacilities"]:
+                    facitlity_category, created = FacilityCategory.objects.get_or_create(
+                        ref_id=k["Id"], name=k["Name"], slug=slugify(k["Name"])
+                    )
+                    for facility_data in k["Facilities"]:
+                        facility, created = Facility.objects.get_or_create(
+                            ref_id=facility_data["Id"],
+                            name=facility_data["Name"],
+                            slug=slugify(facility_data["Name"]),
+                            category=facitlity_category,
+                        )
+                        hotel_facilities.append(
+                            {"short_description": facility_data["Hit"], "facility": facility}
+                        )
+                hotels_info[ref_id] = {
+                    "rests_info": rests_info,
+                    "hotel_facilities": hotel_facilities,
+                }
             update_instances = Hotel.objects.filter(ref_id__in=hotels_info)
             for instance in update_instances:
                 instance.update_date = timezone.now()
                 instance.save()
                 instance.rest_types.clear()
-                instance.rest_types.set(hotels_info[instance.ref_id])
+                instance.rest_types.set(hotels_info[instance.ref_id]["rests_info"])
+                for hotel_facility_data in hotels_info[instance.ref_id]["hotel_facilities"]:
+                    hotel_facility = HotelFacility.objects.get_or_create(
+                        hotel=instance,
+                        short_description=hotel_facility_data["short_description"],
+                        facility=hotel_facility_data["facility"],
+                    )

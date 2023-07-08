@@ -2,6 +2,7 @@ from django.contrib import admin
 from hotels.models import Hotel
 
 from .hotel_image_admin import HotelImageAdminInline
+from .hotel_facility_admin import HotelFacilityAdminInline
 
 
 @admin.register(Hotel)
@@ -43,4 +44,7 @@ class HotelAdmin(admin.ModelAdmin):
             )
         )
 
-    inlines = (HotelImageAdminInline,)
+    inlines = (
+        HotelFacilityAdminInline,
+        HotelImageAdminInline,
+    )

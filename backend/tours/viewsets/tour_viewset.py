@@ -50,7 +50,6 @@ class TourViewSet(GenericViewSet):
         detailed_tour = get_detail_tour(tours, pk)
         hotel_data = serialize_detailed_tour(detailed_tour)
         request_id = tours["requestId"]
-        print(pk)
         data = {"request_id": request_id, "hotels": hotel_data}
         return Response(data=data, status=status.HTTP_200_OK)
 
