@@ -1,3 +1,4 @@
+from hotels.models import Hotel
 from tours.serializers import TourListSerializer
 
 
@@ -22,23 +23,37 @@ def group_tour_into_hotel(sorted_data: list):
     Группировка туров в отели
 
     """
-    hotels_names = []
+    default_tour_min_price = 1000000000
+    hotels = dict()
     for tour in sorted_data:
-        if tour["hotel_name"] not in hotels_names:
-            hotels_names.append(tour["hotel_name"])
-    hotels = list()
-    for hotel in sorted_data:
-        tours = [v for v in sorted_data if v["hotel_name"] == hotel["hotel_name"]]
-        touroperators = set([t["touroperator"] for t in tours])
-        tour_min_price = min([obj["price"] for obj in tours])
-        hotels.append(
-            {
-                "hotel_name": hotel["hotel_name"],
-                "hotel_ref_id": hotel["hotel_ref_id"],
-                "tour_min_price": tour_min_price,
-                "tours_count": len(tours),
-                "touroperator_count": len(touroperators),
-                "tours": tours,
+        try:
+            hotel = hotels[tour["hotel_ref_id"]]
+        except KeyError:
+            hotels[tour["hotel_ref_id"]] = {
+                "hotel_name": tour["hotel_name"],
+                "tour_count": 0,
+                "rest_types": [],
+                "tour_min_price": default_tour_min_price,
+                "touroperators": [],
+                "touroperator_count": 0,
+                "tours": [],
             }
-        )
+            hotel = hotels[tour["hotel_ref_id"]]
+        hotel["tours"].append(tour)
+        hotel["tour_count"] += 1
+        if hotel["tour_min_price"] >= tour["price"]:
+            hotel["tour_min_price"] = tour["price"]
+        if tour["touroperator"] not in hotel["touroperators"]:
+            hotel["touroperators"].append(tour["touroperator"])
+            hotel["touroperator_count"] += 1
+    db_hotels_rest_types = Hotel.objects.filter(ref_id__in=list(hotels.keys())).values(
+        "ref_id", "rest_types__name"
+    )
+    for hotel_rest_type in db_hotels_rest_types:
+        if hotel_rest_type["rest_types__name"] is not None:
+            hotels[int(hotel_rest_type["ref_id"])]["rest_types"].append(
+                hotel_rest_type["rest_types__name"]
+            )
+        else:
+            hotels[int(hotel_rest_type["ref_id"])]["rest_types"] = []
     return hotels

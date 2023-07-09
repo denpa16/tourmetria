@@ -32,13 +32,14 @@ class TourViewSet(GenericViewSet):
 
     def list(self, request, *args, **kwargs):
         params = request.query_params
-        tours_data = self.client.get_tours(params)
-        tours_data = serialize_list_tour(tours_data)
+        row_tours_data = self.client.get_tours(params)
+        tours_data = serialize_list_tour(row_tours_data)
         low_data = json.loads(json.dumps(tours_data["tours"]))
         hotel_data = group_tour_into_hotel(low_data)
         request_id = tours_data["requestId"]
         data = {
             "request_id": request_id,
+            "hotels_count": row_tours_data["hotelsCount"],
             "hotels": hotel_data,
         }
         return Response(data=data, status=status.HTTP_200_OK)
