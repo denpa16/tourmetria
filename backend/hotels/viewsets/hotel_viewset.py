@@ -22,22 +22,34 @@ class HotelViewSet(SpecsFacetsMixin, ReadOnlyModelViewSet):
     pagination_class = HotelLimitOffsetPagination
 
     def get_queryset(self):
-        queryset = Hotel.objects.order_by("-rate", "-popularity_level").prefetch_related(
-            "category",
-            "resort",
-            "resort__country",
-        )
-        if self.action == self.list.__name__:
-            queryset = Hotel.objects.order_by("-rate", "-popularity_level").prefetch_related(
+        queryset = (
+            Hotel.objects.active()
+            .order_by("-rate", "-popularity_level")
+            .prefetch_related(
                 "category",
                 "resort",
                 "resort__country",
             )
+        )
+        if self.action == self.list.__name__:
+            queryset = (
+                Hotel.objects.active()
+                .order_by("-rate", "-popularity_level")
+                .prefetch_related(
+                    "category",
+                    "resort",
+                    "resort__country",
+                )
+            )
         elif self.action == self.retrieve.__name__:
-            queryset = Hotel.objects.order_by("-rate", "-popularity_level").prefetch_related(
-                "category",
-                "resort",
-                "resort__country",
+            queryset = (
+                Hotel.objects.active()
+                .order_by("-rate", "-popularity_level")
+                .prefetch_related(
+                    "category",
+                    "resort",
+                    "resort__country",
+                )
             )
         return queryset
 
