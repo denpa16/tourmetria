@@ -38,6 +38,7 @@ class HotelAdmin(admin.ModelAdmin):
         return (
             super()
             .get_queryset(request)
+            .active("-active")
             .select_related(
                 "resort",
                 "category",

@@ -8,4 +8,4 @@ class HotelQuerySet(QuerySet):
     """
 
     def active(self):
-        return self.filter(active=True)
+        return self.filter(active=True, resort__active=True, resort__country__active=True)
