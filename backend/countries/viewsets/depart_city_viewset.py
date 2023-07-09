@@ -20,7 +20,7 @@ class DepartCityViewSet(SpecsFacetsMixin, ReadOnlyModelViewSet):
     lookup_field = "ref_id"
     lookup_url_kwargs = "ref_id"
 
-    queryset = DepartCity.objects.all()
+    queryset = DepartCity.objects.active()
     serializer_class = DepartCitySerializer
     filterset_class = DepartCityFilter
 

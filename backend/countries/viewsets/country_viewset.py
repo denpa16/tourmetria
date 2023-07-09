@@ -18,7 +18,7 @@ class CountryViewSet(SpecsFacetsMixin, ReadOnlyModelViewSet):
     lookup_field = "ref_id"
     lookup_url_kwargs = "ref_id"
 
-    queryset = Country.objects.all()
+    queryset = Country.objects.active()
     serializer_class = CountrySerializer
     filterset_class = CountryFilter
 
