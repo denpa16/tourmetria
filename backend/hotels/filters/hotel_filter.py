@@ -9,10 +9,10 @@ class HotelFilter(FacetFilterSet):
 
     """
 
-    country = CharInFilter(field_name="resort__country__slug")
+    country = CharInFilter(field_name="resort__country__ref_id")
     country.specs = "get_country_specs"
     country.aggregate = "country_aggregate"
-    resort = CharInFilter(field_name="resort__slug")
+    resort = CharInFilter(field_name="resort__ref_id")
     resort.specs = "get_resort_specs"
     resort.aggregate = "resort_aggregate"
     rate = RangeFilter()
@@ -20,7 +20,7 @@ class HotelFilter(FacetFilterSet):
     popularity_level.specs = "get_popularity_level_specs"
     popularity_level.aggregate = "popularity_level_aggregate"
     is_in_bonus_program = BooleanFilter()
-    category = CharInFilter(field_name="category__name")
+    category = CharInFilter(field_name="category__ref_id")
     category.specs = "get_category_specs"
     category.aggregate = "category_aggregate"
 
@@ -36,8 +36,8 @@ class HotelFilter(FacetFilterSet):
             .distinct("resort__country__name", "resort__country__ref_id")
         )
         specs = [
-            {"label": country_name, "value": country_slug}
-            for country_name, country_slug in queryset
+            {"label": country_name, "value": country_ref_id}
+            for country_name, country_ref_id in queryset
         ]
         return specs
 
@@ -57,7 +57,8 @@ class HotelFilter(FacetFilterSet):
             .distinct("resort__name", "resort__ref_id")
         )
         specs = [
-            {"label": resort_name, "value": resort_slug} for resort_name, resort_slug in queryset
+            {"label": resort_name, "value": resort_ref_id}
+            for resort_name, resort_ref_id in queryset
         ]
         return specs
 
