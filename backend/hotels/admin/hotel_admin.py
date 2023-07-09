@@ -4,6 +4,8 @@ from hotels.models import Hotel
 from .hotel_image_admin import HotelImageAdminInline
 from .hotel_facility_admin import HotelFacilityAdminInline
 
+from hotels.tasks import load_related_data_from_sletatru_task
+
 
 @admin.register(Hotel)
 class HotelAdmin(admin.ModelAdmin):
@@ -38,7 +40,7 @@ class HotelAdmin(admin.ModelAdmin):
         return (
             super()
             .get_queryset(request)
-            .active("-active")
+            .order_by("-active")
             .select_related(
                 "resort",
                 "category",
@@ -48,4 +50,20 @@ class HotelAdmin(admin.ModelAdmin):
     inlines = (
         HotelFacilityAdminInline,
         HotelImageAdminInline,
+    )
+
+    actions = [
+        "load_related_data_from_sletatru",
+    ]
+
+    def load_related_data_from_sletatru(self, request, queryset):
+        """
+        Загрузка связанных атрибутов отелей
+
+        """
+
+        load_related_data_from_sletatru_task.delay()
+
+    load_related_data_from_sletatru.short_description = (
+        "Загрузка связанных атрибутов отелей из Слетать.ру"
     )
