@@ -32,3 +32,6 @@ class CountryAdmin(admin.ModelAdmin):
     )
     search_fields = ("name",)
     list_editable = ("active",)
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).order_by("-active")

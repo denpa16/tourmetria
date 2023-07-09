@@ -32,6 +32,7 @@ class DepartCityAdmin(admin.ModelAdmin):
         return (
             super()
             .get_queryset(request)
+            .order_by("-active")
             .select_related(
                 "country",
             )
