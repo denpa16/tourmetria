@@ -18,6 +18,7 @@ class HotelAdmin(admin.ModelAdmin):
         "__str__",
         "active",
         "id",
+        "ref_id",
         "resort",
         "category",
         "popularity_level",
@@ -32,6 +33,7 @@ class HotelAdmin(admin.ModelAdmin):
     search_fields = (
         "name",
         "resort__name",
+        "ref_id",
     )
     filter_horizontal = ("rest_types",)
     list_editable = ("active",)
