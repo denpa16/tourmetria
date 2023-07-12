@@ -5,3 +5,6 @@ class HotelsConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "hotels"
     verbose_name = "Отели"
+
+    def ready(self):
+        from . import signals

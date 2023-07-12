@@ -3,6 +3,7 @@ from common.decorators import task_logging
 from sletatru.services import SletatruClient
 from django.conf import settings
 
+
 from sletatru.converters import (
     HotelDataConverter,
     HotelDetailDataConverter,

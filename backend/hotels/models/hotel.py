@@ -1,6 +1,7 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from ckeditor.fields import RichTextField
+from django.core.exceptions import ValidationError
 
 from hotels.querysets import HotelQuerySet
 
@@ -46,6 +47,9 @@ class Hotel(models.Model):
         max_length=255,
         blank=True,
         null=True,
+    )
+    sletatru_url = models.URLField(
+        verbose_name="Ссылка страницы отеля на сайте Слетать.ру", blank=True, null=True
     )
     beach_line = models.PositiveIntegerField(
         verbose_name="Номер пляжной линии",
@@ -114,3 +118,15 @@ class Hotel(models.Model):
 
     def __str__(self):
         return self.name
+
+    def clean(self):
+        fields = [
+            "sletatru_url",
+        ]
+
+        for field in fields:
+            if active_field := getattr(self, "active") is True:
+                if self_field := getattr(self, field) is None:
+                    raise ValidationError(
+                        f"Для активного отеля необходимо заполнить {self._meta.get_field(f'{field}').verbose_name}"
+                    )
