@@ -6,14 +6,9 @@ class RoomImage(models.Model):
     Изображние номера отеля
 
     """
-    room = models.ForeignKey(
-        "rooms.Room",
-        verbose_name="Номер",
-        on_delete=models.CASCADE
-    )
-    url = models.TextField(
-        verbose_name="Ссылка"
-    )
+
+    room = models.ForeignKey("rooms.Room", verbose_name="Номер", on_delete=models.CASCADE)
+    url = models.TextField(verbose_name="Ссылка")
 
     class Meta:
         verbose_name = "Изображение номера"

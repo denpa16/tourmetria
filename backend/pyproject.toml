@@ -57,6 +57,7 @@ Pillow = "9.3.*"
 django-robots = "5.0.*"
 beautifulsoup4 = "4.12.*"
 python-slugify = "^6.1.2"
+openpyxl = "^3.0.10"
 
 [tool.poetry.dev-dependencies]
 django-debug-toolbar = "^3.2.1"

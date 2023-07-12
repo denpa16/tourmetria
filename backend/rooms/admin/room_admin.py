@@ -18,6 +18,5 @@ class RoomAdmin(admin.ModelAdmin):
     Номер
 
     """
-    inlines = (
-        RoomImageAdminInline,
-    )
+
+    inlines = (RoomImageAdminInline,)

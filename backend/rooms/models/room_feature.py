@@ -6,10 +6,8 @@ class RoomFeatureCategory(models.Model):
     Категория преимущества номера
 
     """
-    name = models.CharField(
-        verbose_name="Название",
-        max_length=255
-    )
+
+    name = models.CharField(verbose_name="Название", max_length=255)
 
     class Meta:
         verbose_name = "Категория преимущества номера"
@@ -24,6 +22,7 @@ class RoomFeature(models.Model):
     Преимущества номера
 
     """
+
     category = models.ForeignKey(
         "rooms.RoomFeatureCategory",
         verbose_name="Категория",
@@ -31,10 +30,7 @@ class RoomFeature(models.Model):
         blank=True,
         null=True,
     )
-    name = models.CharField(
-        verbose_name="Название",
-        max_length=255
-    )
+    name = models.CharField(verbose_name="Название", max_length=255)
 
     class Meta:
         verbose_name = "Преимущество номера"
