@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "hotels.apps.HotelsConfig",
     "tours.apps.ToursConfig",
     "tg.apps.TgConfig",
+    "rooms.apps.RoomsConfig",
 ]
 
 MIDDLEWARE = [
