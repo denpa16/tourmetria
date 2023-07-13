@@ -18,6 +18,8 @@ class SletatruPaths:
     tours_dates = "GetTourDates"
     meals = "GetMeals"
     hotel_detail = "GetHotelInfo"
+    queue_flights = "QueueActualization"
+    tour_flights = "GetActualizationResult"
 
 
 class RequestMethods:
@@ -262,3 +264,35 @@ class SletatruClient:
                 return []
         else:
             return []
+
+    def get_tour_flights(self, params):
+        """
+        Авиарейсы по туру
+
+        """
+        logger.info("sletatru_tour_flights")
+        string_params = "&".join([f"{key}={value}" for key, value in params.items()])
+        formatted_params = string_params
+        queue_url = f"https://module.sletat.ru/Main.svc/QueueActualization?{formatted_params}"
+        headers = {
+            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/51.0.2704.106 Safari/537.36 OPR/38.0.2220.41",
+            "Content-Type": "application/json",
+            "Referer": "https://sletat.ru/",
+        }
+        queue_response = requests.get(headers=headers, url=queue_url)
+        queue_data = queue_response.json()
+        code = queue_data["QueueActualizationResult"]["Data"]["Code"]
+        flights_url = f"https://module.sletat.ru/Main.svc/GetActualizationResult?code={code}"
+        flights_data = dict()
+        for _ in range(15):
+            flights_response = requests.get(headers=headers, url=flights_url)
+            flights_data = flights_response.json()
+            if flights_data["GetActualizationResultResult"] is not None:
+                break
+        return_data = dict()
+        return_data["resourceData"] = flights_data["GetActualizationResultResult"]["Data"][
+            "resourceData"
+        ]
+        return_data["resources"] = flights_data["GetActualizationResultResult"]["Data"]["resources"]
+        return return_data

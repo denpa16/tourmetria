@@ -13,6 +13,7 @@ from tours.utils import (
     serialize_detailed_tour,
     serialize_list_tour,
     group_tour_into_hotel,
+    get_flights,
 )
 
 
@@ -63,3 +64,14 @@ class TourViewSet(GenericViewSet):
         params = request.query_params
         tours_dates = self.client.get_tours_dates(params)
         return Response(data=tours_dates, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=("GET",))
+    def get_tour_flights(self, request, *args, **kwargs):
+        """
+        Список доступных перелетов
+
+        """
+        params = request.query_params
+        row_flights = self.client.get_tour_flights(params)
+        flights = get_flights(row_flights)
+        return Response(data={"flights": flights}, status=status.HTTP_200_OK)
